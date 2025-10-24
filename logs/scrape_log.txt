@@ -1,0 +1,2 @@
+[2025-10-20 19:43:44] Starting scrape for URL: https://www.zillow.com/newton-ma/single-family-home/
+[2025-10-20 19:43:45] ✅ Scraped 9 listings. Saved to data/raw_listings.csv

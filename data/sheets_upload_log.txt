@@ -1,0 +1,10 @@
+2025-10-23T16:37:54.434203 | Sheet: DevelopmentLeads | Listings: 0 | Location: Newton, MA
+2025-10-23T16:43:11.346445 | Sheet: DevelopmentLeads | Listings: 0 | Location: Newton, MA
+2025-10-23T16:45:31.211577 | Sheet: DevelopmentLeads | Listings: 0 | Location: Newton, MA
+2025-10-23T16:46:02.529909 | Sheet: DevelopmentLeads | Listings: 0 | Location: Newton, MA
+2025-10-23T16:52:37.349383 | Sheet: DevelopmentLeads | Listings: 0 | Location: Newton, MA
+2025-10-23T16:54:58.248740 | Sheet: DevelopmentLeads | Listings: 0 | Location: Newton, MA
+2025-10-23T16:58:35.370479 | Sheet: DevelopmentLeads | Listings: 0 | Location: Newton, MA
+2025-10-23T16:59:49.281891 | Sheet: DevelopmentLeads | Listings: 0 | Location: Newton, MA
+2025-10-23T17:02:59.351531 | Sheet: DevelopmentLeads | Listings: 9 | Location: Newton, MA
+2025-10-23T17:05:39.867705 | Sheet: DevelopmentLeads | Listings: 29 | Location: Newton, MA
