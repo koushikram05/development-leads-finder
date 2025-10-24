@@ -67,6 +67,14 @@ class DevelopmentPipeline:
         start_time = datetime.now()
         self.logger.info(f"Starting pipeline: {search_query}")
         
+        # Send notification that scan has started
+        try:
+            from app.integrations.alert_manager import AlertManager
+            alert_manager = AlertManager(email_enabled=True, slack_enabled=True)
+            alert_manager.notify_scan_started(run_type="manual")
+        except Exception as e:
+            self.logger.debug(f"Could not send scan started notification: {e}")
+        
         # Stage 1: Data Collection
         self.logger.info("\n" + "=" * 60)
         self.logger.info("STAGE 1: DATA COLLECTION")
@@ -206,13 +214,13 @@ class DevelopmentPipeline:
             try:
                 from app.integrations.alert_manager import AlertManager
                 
+                alert_manager = AlertManager(email_enabled=True, slack_enabled=True)
+                
                 # Filter high-value opportunities (score >= 70)
                 high_value = [l for l in classified_listings if float(l.get('development_score', 0)) >= 70.0]
                 
                 if high_value:
                     self.logger.info(f"Found {len(high_value)} high-value opportunities (score >= 70)")
-                    
-                    alert_manager = AlertManager(email_enabled=True, slack_enabled=True)
                     
                     alert_results = alert_manager.alert_on_opportunities(
                         opportunities=high_value,
@@ -228,10 +236,63 @@ class DevelopmentPipeline:
                     if not alert_results.get('email') and not alert_results.get('slack'):
                         self.logger.warning("Alerts not configured - skipped email/Slack")
                 else:
-                    self.logger.info("No high-value opportunities found - no alerts sent")
+                    self.logger.info("No high-value opportunities found - sending scan completion summary")
+                    
+                    # Send scan completed notification (summary with no new values found)
+                    summary_results = alert_manager.notify_scan_completed(
+                        total_found=len(all_listings),
+                        opportunities_found=len(development_opportunities),
+                        high_value_found=0,
+                        run_type="manual"
+                    )
+                    
+                    if summary_results.get('email'):
+                        self.logger.info(f"✓ Scan completion email sent")
+                    if summary_results.get('slack'):
+                        self.logger.info(f"✓ Scan completion Slack notification sent")
                     
             except Exception as e:
                 self.logger.warning(f"Alert sending failed (non-critical): {e}")
+        
+        # Stage 6: Save to Historical Database
+        self.logger.info("\n" + "=" * 60)
+        self.logger.info("STAGE 6: SAVING TO HISTORICAL DATABASE")
+        self.logger.info("=" * 60)
+        
+        try:
+            from app.integrations.database_manager import HistoricalDatabaseManager
+            
+            db = HistoricalDatabaseManager()
+            
+            # Record this scan run
+            run_id = db.record_scan_run(
+                search_query=search_query,
+                location=location,
+                run_type="manual",
+                total_found=len(all_listings),
+                opportunities_found=len(development_opportunities),
+                high_value_found=len(high_value) if classified_listings else 0,
+                duration_seconds=(datetime.now() - start_time).total_seconds()
+            )
+            
+            # Save all classified listings to database
+            if classified_listings:
+                db_stats = db.save_listings(classified_listings, run_id, auto_classify=True)
+                self.logger.info(f"✓ Database saved: {db_stats['new_listings']} new, "
+                               f"{db_stats['updated_listings']} updated, "
+                               f"{db_stats['classifications_added']} classifications")
+            
+            # Show database statistics
+            db_stats = db.get_statistics(days=30)
+            self.logger.info(f"✓ Historical database now contains:")
+            self.logger.info(f"  - {db_stats['total_listings']} total properties")
+            self.logger.info(f"  - {db_stats['high_value_opportunities']} high-value opportunities (last 30 days)")
+            self.logger.info(f"  - {db_stats['recent_runs']} scan runs (last 30 days)")
+            
+        except Exception as e:
+            self.logger.warning(f"Database save failed (non-critical): {e}")
+            import traceback
+            self.logger.debug(traceback.format_exc())
         
         if development_opportunities:
             save_to_csv(development_opportunities, 'development_opportunities.csv')

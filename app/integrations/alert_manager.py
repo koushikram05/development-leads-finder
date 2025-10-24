@@ -11,6 +11,10 @@ from email.mime.multipart import MIMEMultipart
 from datetime import datetime
 from typing import List, Dict, Optional
 import requests
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 
 class AlertManager:
@@ -51,6 +55,76 @@ class AlertManager:
         if self.slack_enabled and not self.slack_webhook:
             self.logger.warning("Slack enabled but SLACK_WEBHOOK_URL not configured")
             self.slack_enabled = False
+    
+    def notify_scan_started(
+        self,
+        run_type: str = "manual",
+        recipient_email: Optional[str] = None
+    ) -> Dict[str, bool]:
+        """
+        Send notification that scan has started (small notification)
+        
+        Args:
+            run_type: "daily", "weekly", or "manual"
+            recipient_email: Email to send to (uses SENDER_EMAIL if not provided)
+        
+        Returns:
+            Dictionary with success status for each channel
+        """
+        results = {}
+        
+        if self.email_enabled:
+            recipient = recipient_email or self.sender_email
+            results['email'] = self._send_scan_started_email(recipient, run_type)
+        else:
+            results['email'] = False
+        
+        if self.slack_enabled:
+            results['slack'] = self._send_scan_started_slack(run_type)
+        else:
+            results['slack'] = False
+        
+        return results
+    
+    def notify_scan_completed(
+        self,
+        total_found: int = 0,
+        opportunities_found: int = 0,
+        high_value_found: int = 0,
+        run_type: str = "manual",
+        recipient_email: Optional[str] = None
+    ) -> Dict[str, bool]:
+        """
+        Send notification that scan completed with summary (no new values found notification)
+        
+        Args:
+            total_found: Total properties found in scan
+            opportunities_found: Development opportunities found
+            high_value_found: High-value opportunities (score >= 70)
+            run_type: "daily", "weekly", or "manual"
+            recipient_email: Email to send to (uses SENDER_EMAIL if not provided)
+        
+        Returns:
+            Dictionary with success status for each channel
+        """
+        results = {}
+        
+        if self.email_enabled:
+            recipient = recipient_email or self.sender_email
+            results['email'] = self._send_scan_completed_email(
+                total_found, opportunities_found, high_value_found, recipient, run_type
+            )
+        else:
+            results['email'] = False
+        
+        if self.slack_enabled:
+            results['slack'] = self._send_scan_completed_slack(
+                total_found, opportunities_found, high_value_found, run_type
+            )
+        else:
+            results['slack'] = False
+        
+        return results
     
     def alert_on_opportunities(
         self,
@@ -400,6 +474,256 @@ class AlertManager:
         ])
         
         return blocks
+    
+    def _send_scan_started_email(
+        self,
+        recipient_email: str,
+        run_type: str
+    ) -> bool:
+        """
+        Send small notification that scan has started
+        
+        Args:
+            recipient_email: Email recipient
+            run_type: "daily", "weekly", or "manual"
+        
+        Returns:
+            Success status
+        """
+        try:
+            run_type_display = run_type.replace('_', ' ').title()
+            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            
+            msg = MIMEMultipart('alternative')
+            msg['Subject'] = f"🔄 {run_type_display} Scan Started"
+            msg['From'] = self.sender_email
+            msg['To'] = recipient_email
+            
+            # Create simple HTML
+            html = f"""
+            <html>
+            <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #333;">
+                <div style="max-width: 500px; margin: 20px auto; padding: 20px; background: #f0f7ff; border-radius: 8px; border-left: 4px solid #0066cc;">
+                    <h2 style="color: #0066cc; margin-top: 0;">🔄 Scan Started</h2>
+                    <p style="font-size: 16px; color: #555;">
+                        <strong>{run_type_display}</strong> scan has been initiated.
+                    </p>
+                    <p style="font-size: 14px; color: #888;">
+                        Time: {timestamp}<br/>
+                        Type: {run_type_display} Scan<br/>
+                        Status: ⏳ In Progress
+                    </p>
+                    <p style="font-size: 12px; color: #999; border-top: 1px solid #ddd; padding-top: 10px; margin-top: 15px;">
+                        You'll receive a follow-up email when the scan completes with results.
+                    </p>
+                </div>
+            </body>
+            </html>
+            """
+            
+            part = MIMEText(html, 'html')
+            msg.attach(part)
+            
+            # Send email
+            with smtplib.SMTP(self.smtp_server, self.smtp_port) as server:
+                server.starttls()
+                server.login(self.sender_email, self.sender_password)
+                server.send_message(msg)
+            
+            self.logger.info(f"✓ Scan started notification sent to {recipient_email}")
+            return True
+            
+        except Exception as e:
+            self.logger.error(f"✗ Failed to send scan started email: {e}")
+            return False
+    
+    def _send_scan_started_slack(self, run_type: str) -> bool:
+        """Send Slack notification that scan started"""
+        try:
+            run_type_display = run_type.replace('_', ' ').title()
+            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            
+            blocks = [
+                {
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": f"🔄 *{run_type_display} Scan Started*\n_{timestamp}_"
+                    }
+                }
+            ]
+            
+            payload = {'blocks': blocks, 'text': f"{run_type_display} scan started"}
+            requests.post(self.slack_webhook, json=payload, timeout=10)
+            self.logger.info(f"✓ Scan started notification sent to Slack")
+            return True
+            
+        except Exception as e:
+            self.logger.error(f"✗ Failed to send Slack scan started: {e}")
+            return False
+    
+    def _send_scan_completed_email(
+        self,
+        total_found: int,
+        opportunities_found: int,
+        high_value_found: int,
+        recipient_email: str,
+        run_type: str
+    ) -> bool:
+        """
+        Send notification that scan completed with summary
+        
+        Args:
+            total_found: Total properties found
+            opportunities_found: Development opportunities found
+            high_value_found: High-value properties (score >= 70)
+            recipient_email: Email recipient
+            run_type: "daily", "weekly", or "manual"
+        
+        Returns:
+            Success status
+        """
+        try:
+            run_type_display = run_type.replace('_', ' ').title()
+            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            
+            # Determine status icon
+            if high_value_found > 0:
+                status_icon = "✅"
+                status_text = "High-value opportunities found!"
+            elif opportunities_found > 0:
+                status_icon = "✅"
+                status_text = "Opportunities found"
+            else:
+                status_icon = "ℹ️"
+                status_text = "No new high-value properties found"
+            
+            msg = MIMEMultipart('alternative')
+            msg['Subject'] = f"{status_icon} {run_type_display} Scan Complete"
+            msg['From'] = self.sender_email
+            msg['To'] = recipient_email
+            
+            # Create HTML
+            html = f"""
+            <html>
+            <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #333;">
+                <div style="max-width: 600px; margin: 20px auto; padding: 20px; background: #f9fafb; border-radius: 8px; border-left: 4px solid #10b981;">
+                    <h2 style="color: #10b981; margin-top: 0;">{status_icon} Scan Complete</h2>
+                    
+                    <p style="font-size: 16px; color: #555; margin-bottom: 20px;">
+                        {status_text}
+                    </p>
+                    
+                    <div style="background: white; padding: 15px; border-radius: 6px; border: 1px solid #e5e7eb;">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <tr>
+                                <td style="padding: 8px; color: #666;"><strong>Total Properties Found:</strong></td>
+                                <td style="padding: 8px; text-align: right; color: #111;"><strong>{total_found}</strong></td>
+                            </tr>
+                            <tr style="background: #f3f4f6;">
+                                <td style="padding: 8px; color: #666;"><strong>Development Opportunities:</strong></td>
+                                <td style="padding: 8px; text-align: right; color: #111;"><strong>{opportunities_found}</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px; color: #666;"><strong>High-Value (Score ≥ 70):</strong></td>
+                                <td style="padding: 8px; text-align: right; color: #059669;"><strong>{high_value_found}</strong></td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <p style="font-size: 13px; color: #999; border-top: 1px solid #e5e7eb; padding-top: 15px; margin-top: 15px;">
+                        <strong>Scan Details:</strong><br/>
+                        Time: {timestamp}<br/>
+                        Type: {run_type_display} Scan
+                    </p>
+                    
+                    {f'<p style="padding: 10px; background: #fef3c7; border-radius: 4px; color: #92400e; font-size: 13px; margin-top: 10px;">⭐ High-value opportunities found! Check your Google Sheets for detailed listings.</p>' if high_value_found > 0 else ''}
+                </div>
+            </body>
+            </html>
+            """
+            
+            part = MIMEText(html, 'html')
+            msg.attach(part)
+            
+            # Send email
+            with smtplib.SMTP(self.smtp_server, self.smtp_port) as server:
+                server.starttls()
+                server.login(self.sender_email, self.sender_password)
+                server.send_message(msg)
+            
+            self.logger.info(f"✓ Scan completed notification sent to {recipient_email}")
+            return True
+            
+        except Exception as e:
+            self.logger.error(f"✗ Failed to send scan completed email: {e}")
+            return False
+    
+    def _send_scan_completed_slack(
+        self,
+        total_found: int,
+        opportunities_found: int,
+        high_value_found: int,
+        run_type: str
+    ) -> bool:
+        """Send Slack notification that scan completed"""
+        try:
+            run_type_display = run_type.replace('_', ' ').title()
+            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            
+            # Determine color and status
+            if high_value_found > 0:
+                color = "#10b981"
+                status = "🟢 High-Value Found!"
+            elif opportunities_found > 0:
+                color = "#3b82f6"
+                status = "🟡 Opportunities Found"
+            else:
+                color = "#6b7280"
+                status = "⚪ No New High-Value Found"
+            
+            blocks = [
+                {
+                    "type": "divider"
+                },
+                {
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": f"{status}\n*{run_type_display} Scan Complete*"
+                    }
+                },
+                {
+                    "type": "section",
+                    "fields": [
+                        {
+                            "type": "mrkdwn",
+                            "text": f"*Total Found*\n{total_found}"
+                        },
+                        {
+                            "type": "mrkdwn",
+                            "text": f"*Opportunities*\n{opportunities_found}"
+                        },
+                        {
+                            "type": "mrkdwn",
+                            "text": f"*High-Value (≥70)*\n{high_value_found}"
+                        },
+                        {
+                            "type": "mrkdwn",
+                            "text": f"*Time*\n{timestamp}"
+                        }
+                    ]
+                }
+            ]
+            
+            payload = {'blocks': blocks, 'text': f"{run_type_display} scan completed"}
+            requests.post(self.slack_webhook, json=payload, timeout=10)
+            self.logger.info(f"✓ Scan completed notification sent to Slack")
+            return True
+            
+        except Exception as e:
+            self.logger.error(f"✗ Failed to send Slack scan completed: {e}")
+            return False
     
     def send_pipeline_summary(
         self,
