@@ -197,6 +197,41 @@ class DevelopmentPipeline:
                 self.logger.error(f"Google Sheets upload failed: {e}")
                 import traceback
                 self.logger.error(traceback.format_exc())
+            
+            # Stage 5: Send Alerts for High-Value Opportunities
+            self.logger.info("\n" + "=" * 60)
+            self.logger.info("STAGE 5: SENDING ALERTS")
+            self.logger.info("=" * 60)
+            
+            try:
+                from app.integrations.alert_manager import AlertManager
+                
+                # Filter high-value opportunities (score >= 70)
+                high_value = [l for l in classified_listings if float(l.get('development_score', 0)) >= 70.0]
+                
+                if high_value:
+                    self.logger.info(f"Found {len(high_value)} high-value opportunities (score >= 70)")
+                    
+                    alert_manager = AlertManager(email_enabled=True, slack_enabled=True)
+                    
+                    alert_results = alert_manager.alert_on_opportunities(
+                        opportunities=high_value,
+                        recipient_email=None,  # Uses SENDER_EMAIL from env
+                        run_type="manual"
+                    )
+                    
+                    if alert_results.get('email'):
+                        self.logger.info(f"✓ Email alert sent for {len(high_value)} opportunities")
+                    if alert_results.get('slack'):
+                        self.logger.info(f"✓ Slack alert sent for {len(high_value)} opportunities")
+                    
+                    if not alert_results.get('email') and not alert_results.get('slack'):
+                        self.logger.warning("Alerts not configured - skipped email/Slack")
+                else:
+                    self.logger.info("No high-value opportunities found - no alerts sent")
+                    
+            except Exception as e:
+                self.logger.warning(f"Alert sending failed (non-critical): {e}")
         
         if development_opportunities:
             save_to_csv(development_opportunities, 'development_opportunities.csv')
