@@ -1267,3 +1267,235 @@ Classification Breakdown:
 ============================================================
 2025-10-24 16:43:01 - dev_pipeline - INFO - Pipeline completed successfully!
 2025-10-24 16:43:01 - dev_pipeline - INFO - ============================================================
+2025-10-24 17:29:34 - dev_pipeline - INFO - ============================================================
+2025-10-24 17:29:34 - dev_pipeline - INFO - Development Opportunity Pipeline Initialized
+2025-10-24 17:29:34 - dev_pipeline - INFO - ============================================================
+2025-10-24 17:29:34 - dev_pipeline - INFO - Starting pipeline: Newton MA teardown single family home large lot underbuilt
+2025-10-24 17:29:36 - dev_pipeline - INFO - 
+============================================================
+2025-10-24 17:29:36 - dev_pipeline - INFO - STAGE 1: DATA COLLECTION
+2025-10-24 17:29:36 - dev_pipeline - INFO - ============================================================
+2025-10-24 17:29:36 - dev_pipeline - INFO - Searching via SerpAPI...
+2025-10-24 17:29:36 - llm_search - INFO - Searching: 'Newton MA teardown single family home large lot underbuilt' in Newton, MA
+2025-10-24 17:29:37 - llm_search - INFO - Found 0 listings from search
+2025-10-24 17:29:38 - llm_search - INFO - Searching: 'Newton, MA teardown opportunity' in Newton, MA
+2025-10-24 17:29:40 - llm_search - INFO - Found 10 listings from search
+2025-10-24 17:29:41 - llm_search - INFO - Searching: 'Newton, MA builder special large lot' in Newton, MA
+2025-10-24 17:29:42 - llm_search - INFO - Found 10 listings from search
+2025-10-24 17:29:43 - llm_search - INFO - Searching: 'Newton, MA development opportunity single family' in Newton, MA
+2025-10-24 17:29:45 - llm_search - INFO - Found 10 listings from search
+2025-10-24 17:29:46 - llm_search - INFO - Total unique listings: 30
+2025-10-24 17:29:46 - dev_pipeline - INFO - SerpAPI: Found 30 listings
+2025-10-24 17:29:46 - anil_project - INFO - Deduplicated 30 -> 30 listings
+2025-10-24 17:29:46 - dev_pipeline - INFO - 
+Total unique listings collected: 30
+2025-10-24 17:29:46 - anil_project - INFO - Saved 30 records to /Users/koushikramalingam/Desktop/Anil_Project/data/raw_listings.csv
+2025-10-24 17:29:46 - dev_pipeline - INFO - 
+============================================================
+2025-10-24 17:29:46 - dev_pipeline - INFO - STAGE 2: DATA ENRICHMENT
+2025-10-24 17:29:46 - dev_pipeline - INFO - ============================================================
+2025-10-24 17:29:46 - gis_enrichment - INFO - Enriching: 371 Cherry St, Newton, MA 02465
+2025-10-24 17:29:46 - gis_enrichment - ERROR - Error fetching parcel data: HTTPSConnectionPool(host='gis.newtonma.gov', port=443): Max retries exceeded with url: /arcgis/rest/services/Public/Parcels/MapServer/0/query?where=SITE_ADDR+LIKE+%27%25371+Cherry+St%25%27&outFields=%2A&f=json&returnGeometry=true (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fb6c8e0>: Failed to resolve 'gis.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:29:46 - gis_enrichment - WARNING - Assessment data not available: HTTPSConnectionPool(host='data.newtonma.gov', port=443): Max retries exceeded with url: /resource/assessor.json?address=371+Cherry+St%2C+Newton%2C+MA+02465&%24limit=1 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fb6cd90>: Failed to resolve 'data.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:29:49 - gis_enrichment - INFO - Geocoded: 371 Cherry St, Newton, MA 02465
+2025-10-24 17:29:49 - gis_enrichment - INFO - Enriching: 42 Lindbergh Ave, Newton, MA 02465
+2025-10-24 17:29:49 - gis_enrichment - ERROR - Error fetching parcel data: HTTPSConnectionPool(host='gis.newtonma.gov', port=443): Max retries exceeded with url: /arcgis/rest/services/Public/Parcels/MapServer/0/query?where=SITE_ADDR+LIKE+%27%2542+Lindbergh+Ave%25%27&outFields=%2A&f=json&returnGeometry=true (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbad6d0>: Failed to resolve 'gis.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:29:49 - gis_enrichment - WARNING - Assessment data not available: HTTPSConnectionPool(host='data.newtonma.gov', port=443): Max retries exceeded with url: /resource/assessor.json?address=42+Lindbergh+Ave%2C+Newton%2C+MA+02465&%24limit=1 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbad7f0>: Failed to resolve 'data.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:29:53 - gis_enrichment - INFO - Geocoded: 42 Lindbergh Ave, Newton, MA 02465
+2025-10-24 17:29:53 - gis_enrichment - INFO - Enriching: 253 Nahanton St, Newton, MA 02459
+2025-10-24 17:29:53 - gis_enrichment - ERROR - Error fetching parcel data: HTTPSConnectionPool(host='gis.newtonma.gov', port=443): Max retries exceeded with url: /arcgis/rest/services/Public/Parcels/MapServer/0/query?where=SITE_ADDR+LIKE+%27%25253+Nahanton+St%25%27&outFields=%2A&f=json&returnGeometry=true (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbadd60>: Failed to resolve 'gis.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:29:53 - gis_enrichment - WARNING - Assessment data not available: HTTPSConnectionPool(host='data.newtonma.gov', port=443): Max retries exceeded with url: /resource/assessor.json?address=253+Nahanton+St%2C+Newton%2C+MA+02459&%24limit=1 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbade20>: Failed to resolve 'data.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:29:58 - gis_enrichment - INFO - Geocoded: 253 Nahanton St, Newton, MA 02459
+2025-10-24 17:29:58 - gis_enrichment - INFO - Enriching: 99 Hancock St, Newton, MA 02466
+2025-10-24 17:29:58 - gis_enrichment - ERROR - Error fetching parcel data: HTTPSConnectionPool(host='gis.newtonma.gov', port=443): Max retries exceeded with url: /arcgis/rest/services/Public/Parcels/MapServer/0/query?where=SITE_ADDR+LIKE+%27%2599+Hancock+St%25%27&outFields=%2A&f=json&returnGeometry=true (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbbe2b0>: Failed to resolve 'gis.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:29:58 - gis_enrichment - WARNING - Assessment data not available: HTTPSConnectionPool(host='data.newtonma.gov', port=443): Max retries exceeded with url: /resource/assessor.json?address=99+Hancock+St%2C+Newton%2C+MA+02466&%24limit=1 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbade20>: Failed to resolve 'data.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:29:58 - gis_enrichment - INFO - Geocoded: 99 Hancock St, Newton, MA 02466
+2025-10-24 17:29:58 - gis_enrichment - INFO - Enriching: 299 Mill St, Newton, MA 02460
+2025-10-24 17:29:58 - gis_enrichment - ERROR - Error fetching parcel data: HTTPSConnectionPool(host='gis.newtonma.gov', port=443): Max retries exceeded with url: /arcgis/rest/services/Public/Parcels/MapServer/0/query?where=SITE_ADDR+LIKE+%27%25299+Mill+St%25%27&outFields=%2A&f=json&returnGeometry=true (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbada00>: Failed to resolve 'gis.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:29:58 - gis_enrichment - WARNING - Assessment data not available: HTTPSConnectionPool(host='data.newtonma.gov', port=443): Max retries exceeded with url: /resource/assessor.json?address=299+Mill+St%2C+Newton%2C+MA+02460&%24limit=1 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbad7f0>: Failed to resolve 'data.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:01 - gis_enrichment - INFO - Geocoded: 299 Mill St, Newton, MA 02460
+2025-10-24 17:30:01 - gis_enrichment - INFO - Enriching: 48 River Ave, Newton, MA 02464
+2025-10-24 17:30:01 - gis_enrichment - ERROR - Error fetching parcel data: HTTPSConnectionPool(host='gis.newtonma.gov', port=443): Max retries exceeded with url: /arcgis/rest/services/Public/Parcels/MapServer/0/query?where=SITE_ADDR+LIKE+%27%2548+River+Ave%25%27&outFields=%2A&f=json&returnGeometry=true (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbad820>: Failed to resolve 'gis.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:01 - gis_enrichment - WARNING - Assessment data not available: HTTPSConnectionPool(host='data.newtonma.gov', port=443): Max retries exceeded with url: /resource/assessor.json?address=48+River+Ave%2C+Newton%2C+MA+02464&%24limit=1 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fb6cd30>: Failed to resolve 'data.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:02 - gis_enrichment - INFO - Geocoded: 48 River Ave, Newton, MA 02464
+2025-10-24 17:30:02 - gis_enrichment - INFO - Enriching: 66 Forest Ave, West Newton, MA 02465
+2025-10-24 17:30:02 - gis_enrichment - ERROR - Error fetching parcel data: HTTPSConnectionPool(host='gis.newtonma.gov', port=443): Max retries exceeded with url: /arcgis/rest/services/Public/Parcels/MapServer/0/query?where=SITE_ADDR+LIKE+%27%2566+Forest+Ave%25%27&outFields=%2A&f=json&returnGeometry=true (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fb6c6d0>: Failed to resolve 'gis.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:02 - gis_enrichment - WARNING - Assessment data not available: HTTPSConnectionPool(host='data.newtonma.gov', port=443): Max retries exceeded with url: /resource/assessor.json?address=66+Forest+Ave%2C+West+Newton%2C+MA+02465&%24limit=1 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbbe490>: Failed to resolve 'data.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:11 - gis_enrichment - ERROR - Geocoding failed: 503 Server Error: Service Unavailable for url: https://nominatim.openstreetmap.org/search?q=66+Forest+Ave%2C+West+Newton%2C+MA+02465&format=json&limit=1
+2025-10-24 17:30:11 - gis_enrichment - INFO - Enriching: 11 Rockland Pl, Newton, MA 02464
+2025-10-24 17:30:11 - gis_enrichment - ERROR - Error fetching parcel data: HTTPSConnectionPool(host='gis.newtonma.gov', port=443): Max retries exceeded with url: /arcgis/rest/services/Public/Parcels/MapServer/0/query?where=SITE_ADDR+LIKE+%27%2511+Rockland+Pl%25%27&outFields=%2A&f=json&returnGeometry=true (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbbe8b0>: Failed to resolve 'gis.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:11 - gis_enrichment - WARNING - Assessment data not available: HTTPSConnectionPool(host='data.newtonma.gov', port=443): Max retries exceeded with url: /resource/assessor.json?address=11+Rockland+Pl%2C+Newton%2C+MA+02464&%24limit=1 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbbe9d0>: Failed to resolve 'data.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:12 - gis_enrichment - INFO - Geocoded: 11 Rockland Pl, Newton, MA 02464
+2025-10-24 17:30:12 - gis_enrichment - INFO - Enriching: Vintage homes for sale & real estate in Newton, MA
+2025-10-24 17:30:12 - gis_enrichment - ERROR - Error fetching parcel data: HTTPSConnectionPool(host='gis.newtonma.gov', port=443): Max retries exceeded with url: /arcgis/rest/services/Public/Parcels/MapServer/0/query?where=SITE_ADDR+LIKE+%27%25Vintage+homes+for+sale+%26+real+estate+in+Newton%25%27&outFields=%2A&f=json&returnGeometry=true (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbbef70>: Failed to resolve 'gis.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:12 - gis_enrichment - WARNING - Assessment data not available: HTTPSConnectionPool(host='data.newtonma.gov', port=443): Max retries exceeded with url: /resource/assessor.json?address=Vintage+homes+for+sale+%26+real+estate+in+Newton%2C+MA&%24limit=1 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbc7070>: Failed to resolve 'data.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:15 - gis_enrichment - INFO - Enriching: 37 Harwich Rd, Newton, MA 02467
+2025-10-24 17:30:15 - gis_enrichment - ERROR - Error fetching parcel data: HTTPSConnectionPool(host='gis.newtonma.gov', port=443): Max retries exceeded with url: /arcgis/rest/services/Public/Parcels/MapServer/0/query?where=SITE_ADDR+LIKE+%27%2537+Harwich+Rd%25%27&outFields=%2A&f=json&returnGeometry=true (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbc7730>: Failed to resolve 'gis.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:15 - gis_enrichment - WARNING - Assessment data not available: HTTPSConnectionPool(host='data.newtonma.gov', port=443): Max retries exceeded with url: /resource/assessor.json?address=37+Harwich+Rd%2C+Newton%2C+MA+02467&%24limit=1 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fb47f10>: Failed to resolve 'data.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:16 - gis_enrichment - INFO - Geocoded: 37 Harwich Rd, Newton, MA 02467
+2025-10-24 17:30:16 - gis_enrichment - INFO - Enriching: Homes for Sale in Newton, MA with a Large Lot
+2025-10-24 17:30:16 - gis_enrichment - ERROR - Error fetching parcel data: HTTPSConnectionPool(host='gis.newtonma.gov', port=443): Max retries exceeded with url: /arcgis/rest/services/Public/Parcels/MapServer/0/query?where=SITE_ADDR+LIKE+%27%25Homes+for+Sale+in+Newton%25%27&outFields=%2A&f=json&returnGeometry=true (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fb6cd00>: Failed to resolve 'gis.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:16 - gis_enrichment - WARNING - Assessment data not available: HTTPSConnectionPool(host='data.newtonma.gov', port=443): Max retries exceeded with url: /resource/assessor.json?address=Homes+for+Sale+in+Newton%2C+MA+with+a+Large+Lot&%24limit=1 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbbecd0>: Failed to resolve 'data.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:23 - gis_enrichment - INFO - Enriched 10/30 listings
+2025-10-24 17:30:24 - gis_enrichment - INFO - Enriching: Large Yard - Newton, MA Homes for Sale
+2025-10-24 17:30:24 - gis_enrichment - ERROR - Error fetching parcel data: HTTPSConnectionPool(host='gis.newtonma.gov', port=443): Max retries exceeded with url: /arcgis/rest/services/Public/Parcels/MapServer/0/query?where=SITE_ADDR+LIKE+%27%25Large+Yard+-+Newton%25%27&outFields=%2A&f=json&returnGeometry=true (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbbee50>: Failed to resolve 'gis.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:24 - gis_enrichment - WARNING - Assessment data not available: HTTPSConnectionPool(host='data.newtonma.gov', port=443): Max retries exceeded with url: /resource/assessor.json?address=Large+Yard+-+Newton%2C+MA+Homes+for+Sale&%24limit=1 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbbe940>: Failed to resolve 'data.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:24 - gis_enrichment - INFO - Enriching: Newton, MA Land & Lots for Sale
+2025-10-24 17:30:24 - gis_enrichment - ERROR - Error fetching parcel data: HTTPSConnectionPool(host='gis.newtonma.gov', port=443): Max retries exceeded with url: /arcgis/rest/services/Public/Parcels/MapServer/0/query?where=SITE_ADDR+LIKE+%27%25Newton%25%27&outFields=%2A&f=json&returnGeometry=true (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbbe640>: Failed to resolve 'gis.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:24 - gis_enrichment - WARNING - Assessment data not available: HTTPSConnectionPool(host='data.newtonma.gov', port=443): Max retries exceeded with url: /resource/assessor.json?address=Newton%2C+MA+Land+%26+Lots+for+Sale&%24limit=1 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbbe5e0>: Failed to resolve 'data.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:25 - gis_enrichment - INFO - Enriching: Homes for Sale in Newtonville, Newton with a Large Lot
+2025-10-24 17:30:25 - gis_enrichment - ERROR - Error fetching parcel data: HTTPSConnectionPool(host='gis.newtonma.gov', port=443): Max retries exceeded with url: /arcgis/rest/services/Public/Parcels/MapServer/0/query?where=SITE_ADDR+LIKE+%27%25Homes+for+Sale+in+Newtonville%25%27&outFields=%2A&f=json&returnGeometry=true (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbad5e0>: Failed to resolve 'gis.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:25 - gis_enrichment - WARNING - Assessment data not available: HTTPSConnectionPool(host='data.newtonma.gov', port=443): Max retries exceeded with url: /resource/assessor.json?address=Homes+for+Sale+in+Newtonville%2C+Newton+with+a+Large+Lot&%24limit=1 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbadca0>: Failed to resolve 'data.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:26 - gis_enrichment - INFO - Enriching: New Construction Homes for Sale in Newton, MA
+2025-10-24 17:30:26 - gis_enrichment - ERROR - Error fetching parcel data: HTTPSConnectionPool(host='gis.newtonma.gov', port=443): Max retries exceeded with url: /arcgis/rest/services/Public/Parcels/MapServer/0/query?where=SITE_ADDR+LIKE+%27%25New+Construction+Homes+for+Sale+in+Newton%25%27&outFields=%2A&f=json&returnGeometry=true (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbadfd0>: Failed to resolve 'gis.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:26 - gis_enrichment - WARNING - Assessment data not available: HTTPSConnectionPool(host='data.newtonma.gov', port=443): Max retries exceeded with url: /resource/assessor.json?address=New+Construction+Homes+for+Sale+in+Newton%2C+MA&%24limit=1 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbadb20>: Failed to resolve 'data.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:32 - gis_enrichment - INFO - Enriching: Homes for Sale in West Newton, MA with a Large Lot
+2025-10-24 17:30:32 - gis_enrichment - ERROR - Error fetching parcel data: HTTPSConnectionPool(host='gis.newtonma.gov', port=443): Max retries exceeded with url: /arcgis/rest/services/Public/Parcels/MapServer/0/query?where=SITE_ADDR+LIKE+%27%25Homes+for+Sale+in+West+Newton%25%27&outFields=%2A&f=json&returnGeometry=true (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbc7160>: Failed to resolve 'gis.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:32 - gis_enrichment - WARNING - Assessment data not available: HTTPSConnectionPool(host='data.newtonma.gov', port=443): Max retries exceeded with url: /resource/assessor.json?address=Homes+for+Sale+in+West+Newton%2C+MA+with+a+Large+Lot&%24limit=1 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbc78b0>: Failed to resolve 'data.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:38 - gis_enrichment - INFO - Enriching: Homes for Sale with 3 Garages in Newton, MA - Realtor.com
+2025-10-24 17:30:38 - gis_enrichment - ERROR - Error fetching parcel data: HTTPSConnectionPool(host='gis.newtonma.gov', port=443): Max retries exceeded with url: /arcgis/rest/services/Public/Parcels/MapServer/0/query?where=SITE_ADDR+LIKE+%27%25Homes+for+Sale+with+3+Garages+in+Newton%25%27&outFields=%2A&f=json&returnGeometry=true (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbadfd0>: Failed to resolve 'gis.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:38 - gis_enrichment - WARNING - Assessment data not available: HTTPSConnectionPool(host='data.newtonma.gov', port=443): Max retries exceeded with url: /resource/assessor.json?address=Homes+for+Sale+with+3+Garages+in+Newton%2C+MA+-+Realtor.com&%24limit=1 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbad700>: Failed to resolve 'data.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:39 - gis_enrichment - INFO - Enriching: Fixer Upper Homes for Sale in Newton, MA
+2025-10-24 17:30:39 - gis_enrichment - ERROR - Error fetching parcel data: HTTPSConnectionPool(host='gis.newtonma.gov', port=443): Max retries exceeded with url: /arcgis/rest/services/Public/Parcels/MapServer/0/query?where=SITE_ADDR+LIKE+%27%25Fixer+Upper+Homes+for+Sale+in+Newton%25%27&outFields=%2A&f=json&returnGeometry=true (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbad7c0>: Failed to resolve 'gis.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:39 - gis_enrichment - WARNING - Assessment data not available: HTTPSConnectionPool(host='data.newtonma.gov', port=443): Max retries exceeded with url: /resource/assessor.json?address=Fixer+Upper+Homes+for+Sale+in+Newton%2C+MA&%24limit=1 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbbe130>: Failed to resolve 'data.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:40 - gis_enrichment - INFO - Enriching: Homes for Sale in Newton, MA with a Swimming Pool
+2025-10-24 17:30:40 - gis_enrichment - ERROR - Error fetching parcel data: HTTPSConnectionPool(host='gis.newtonma.gov', port=443): Max retries exceeded with url: /arcgis/rest/services/Public/Parcels/MapServer/0/query?where=SITE_ADDR+LIKE+%27%25Homes+for+Sale+in+Newton%25%27&outFields=%2A&f=json&returnGeometry=true (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbbe490>: Failed to resolve 'gis.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:40 - gis_enrichment - WARNING - Assessment data not available: HTTPSConnectionPool(host='data.newtonma.gov', port=443): Max retries exceeded with url: /resource/assessor.json?address=Homes+for+Sale+in+Newton%2C+MA+with+a+Swimming+Pool&%24limit=1 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbbe9d0>: Failed to resolve 'data.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:44 - gis_enrichment - INFO - Enriching: Single Story Homes for Sale in Newton, MA
+2025-10-24 17:30:44 - gis_enrichment - ERROR - Error fetching parcel data: HTTPSConnectionPool(host='gis.newtonma.gov', port=443): Max retries exceeded with url: /arcgis/rest/services/Public/Parcels/MapServer/0/query?where=SITE_ADDR+LIKE+%27%25Single+Story+Homes+for+Sale+in+Newton%25%27&outFields=%2A&f=json&returnGeometry=true (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbbee20>: Failed to resolve 'gis.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:44 - gis_enrichment - WARNING - Assessment data not available: HTTPSConnectionPool(host='data.newtonma.gov', port=443): Max retries exceeded with url: /resource/assessor.json?address=Single+Story+Homes+for+Sale+in+Newton%2C+MA&%24limit=1 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbbef10>: Failed to resolve 'data.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:45 - gis_enrichment - INFO - Enriching: Newton MA Real Estate & Homes For Sale
+2025-10-24 17:30:45 - gis_enrichment - ERROR - Error fetching parcel data: HTTPSConnectionPool(host='gis.newtonma.gov', port=443): Max retries exceeded with url: /arcgis/rest/services/Public/Parcels/MapServer/0/query?where=SITE_ADDR+LIKE+%27%25Newton+MA+Real+Estate+%26+Homes+For+Sale%25%27&outFields=%2A&f=json&returnGeometry=true (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fb6cd30>: Failed to resolve 'gis.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:45 - gis_enrichment - WARNING - Assessment data not available: HTTPSConnectionPool(host='data.newtonma.gov', port=443): Max retries exceeded with url: /resource/assessor.json?address=Newton+MA+Real+Estate+%26+Homes+For+Sale&%24limit=1 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fb6ccd0>: Failed to resolve 'data.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:48 - gis_enrichment - INFO - Enriched 20/30 listings
+2025-10-24 17:30:49 - gis_enrichment - INFO - Enriching: New Construction Homes in Newton MA
+2025-10-24 17:30:49 - gis_enrichment - ERROR - Error fetching parcel data: HTTPSConnectionPool(host='gis.newtonma.gov', port=443): Max retries exceeded with url: /arcgis/rest/services/Public/Parcels/MapServer/0/query?where=SITE_ADDR+LIKE+%27%25New+Construction+Homes+in+Newton+MA%25%27&outFields=%2A&f=json&returnGeometry=true (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbc7b20>: Failed to resolve 'gis.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:49 - gis_enrichment - WARNING - Assessment data not available: HTTPSConnectionPool(host='data.newtonma.gov', port=443): Max retries exceeded with url: /resource/assessor.json?address=New+Construction+Homes+in+Newton+MA&%24limit=1 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbc7100>: Failed to resolve 'data.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:52 - gis_enrichment - INFO - Enriching: New homes for sale & real estate in Newton, MA
+2025-10-24 17:30:52 - gis_enrichment - ERROR - Error fetching parcel data: HTTPSConnectionPool(host='gis.newtonma.gov', port=443): Max retries exceeded with url: /arcgis/rest/services/Public/Parcels/MapServer/0/query?where=SITE_ADDR+LIKE+%27%25New+homes+for+sale+%26+real+estate+in+Newton%25%27&outFields=%2A&f=json&returnGeometry=true (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbc71c0>: Failed to resolve 'gis.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:52 - gis_enrichment - WARNING - Assessment data not available: HTTPSConnectionPool(host='data.newtonma.gov', port=443): Max retries exceeded with url: /resource/assessor.json?address=New+homes+for+sale+%26+real+estate+in+Newton%2C+MA&%24limit=1 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbc7520>: Failed to resolve 'data.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:53 - gis_enrichment - INFO - Enriching: Land for Sale in Newton, MA
+2025-10-24 17:30:53 - gis_enrichment - ERROR - Error fetching parcel data: HTTPSConnectionPool(host='gis.newtonma.gov', port=443): Max retries exceeded with url: /arcgis/rest/services/Public/Parcels/MapServer/0/query?where=SITE_ADDR+LIKE+%27%25Land+for+Sale+in+Newton%25%27&outFields=%2A&f=json&returnGeometry=true (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fb6c6a0>: Failed to resolve 'gis.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:53 - gis_enrichment - WARNING - Assessment data not available: HTTPSConnectionPool(host='data.newtonma.gov', port=443): Max retries exceeded with url: /resource/assessor.json?address=Land+for+Sale+in+Newton%2C+MA&%24limit=1 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fb6c760>: Failed to resolve 'data.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:56 - gis_enrichment - INFO - Enriching: Newton MA Condos & Apartments For Sale - 57 Listings
+2025-10-24 17:30:56 - gis_enrichment - ERROR - Error fetching parcel data: HTTPSConnectionPool(host='gis.newtonma.gov', port=443): Max retries exceeded with url: /arcgis/rest/services/Public/Parcels/MapServer/0/query?where=SITE_ADDR+LIKE+%27%25Newton+MA+Condos+%26+Apartments+For+Sale+-+57+Listings%25%27&outFields=%2A&f=json&returnGeometry=true (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbbeb20>: Failed to resolve 'gis.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:30:56 - gis_enrichment - WARNING - Assessment data not available: HTTPSConnectionPool(host='data.newtonma.gov', port=443): Max retries exceeded with url: /resource/assessor.json?address=Newton+MA+Condos+%26+Apartments+For+Sale+-+57+Listings&%24limit=1 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbbe760>: Failed to resolve 'data.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:31:00 - gis_enrichment - INFO - Enriching: Townhouses for Sale in Newton, MA
+2025-10-24 17:31:00 - gis_enrichment - ERROR - Error fetching parcel data: HTTPSConnectionPool(host='gis.newtonma.gov', port=443): Max retries exceeded with url: /arcgis/rest/services/Public/Parcels/MapServer/0/query?where=SITE_ADDR+LIKE+%27%25Townhouses+for+Sale+in+Newton%25%27&outFields=%2A&f=json&returnGeometry=true (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbbe040>: Failed to resolve 'gis.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:31:00 - gis_enrichment - WARNING - Assessment data not available: HTTPSConnectionPool(host='data.newtonma.gov', port=443): Max retries exceeded with url: /resource/assessor.json?address=Townhouses+for+Sale+in+Newton%2C+MA&%24limit=1 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbbe730>: Failed to resolve 'data.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:31:00 - gis_enrichment - INFO - Enriching: West Newton Newton Real Estate & Homes For Sale
+2025-10-24 17:31:00 - gis_enrichment - ERROR - Error fetching parcel data: HTTPSConnectionPool(host='gis.newtonma.gov', port=443): Max retries exceeded with url: /arcgis/rest/services/Public/Parcels/MapServer/0/query?where=SITE_ADDR+LIKE+%27%25West+Newton+Newton+Real+Estate+%26+Homes+For+Sale%25%27&outFields=%2A&f=json&returnGeometry=true (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbad760>: Failed to resolve 'gis.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:31:00 - gis_enrichment - WARNING - Assessment data not available: HTTPSConnectionPool(host='data.newtonma.gov', port=443): Max retries exceeded with url: /resource/assessor.json?address=West+Newton+Newton+Real+Estate+%26+Homes+For+Sale&%24limit=1 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbad880>: Failed to resolve 'data.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:31:01 - gis_enrichment - INFO - Enriching: Newton Corner, MA homes for sale & real estate
+2025-10-24 17:31:01 - gis_enrichment - ERROR - Error fetching parcel data: HTTPSConnectionPool(host='gis.newtonma.gov', port=443): Max retries exceeded with url: /arcgis/rest/services/Public/Parcels/MapServer/0/query?where=SITE_ADDR+LIKE+%27%25Newton+Corner%25%27&outFields=%2A&f=json&returnGeometry=true (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbad9a0>: Failed to resolve 'gis.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:31:01 - gis_enrichment - WARNING - Assessment data not available: HTTPSConnectionPool(host='data.newtonma.gov', port=443): Max retries exceeded with url: /resource/assessor.json?address=Newton+Corner%2C+MA+homes+for+sale+%26+real+estate&%24limit=1 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbada60>: Failed to resolve 'data.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:31:03 - gis_enrichment - INFO - Enriching: New homes for sale & real estate in Nonantum, MA
+2025-10-24 17:31:03 - gis_enrichment - ERROR - Error fetching parcel data: HTTPSConnectionPool(host='gis.newtonma.gov', port=443): Max retries exceeded with url: /arcgis/rest/services/Public/Parcels/MapServer/0/query?where=SITE_ADDR+LIKE+%27%25New+homes+for+sale+%26+real+estate+in+Nonantum%25%27&outFields=%2A&f=json&returnGeometry=true (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbc7580>: Failed to resolve 'gis.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:31:03 - gis_enrichment - WARNING - Assessment data not available: HTTPSConnectionPool(host='data.newtonma.gov', port=443): Max retries exceeded with url: /resource/assessor.json?address=New+homes+for+sale+%26+real+estate+in+Nonantum%2C+MA&%24limit=1 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbc7a90>: Failed to resolve 'data.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:31:04 - gis_enrichment - INFO - Enriching: Newton Centre, MA homes for sale & real estate
+2025-10-24 17:31:04 - gis_enrichment - ERROR - Error fetching parcel data: HTTPSConnectionPool(host='gis.newtonma.gov', port=443): Max retries exceeded with url: /arcgis/rest/services/Public/Parcels/MapServer/0/query?where=SITE_ADDR+LIKE+%27%25Newton+Centre%25%27&outFields=%2A&f=json&returnGeometry=true (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbc7f10>: Failed to resolve 'gis.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:31:04 - gis_enrichment - WARNING - Assessment data not available: HTTPSConnectionPool(host='data.newtonma.gov', port=443): Max retries exceeded with url: /resource/assessor.json?address=Newton+Centre%2C+MA+homes+for+sale+%26+real+estate&%24limit=1 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x11fbd0070>: Failed to resolve 'data.newtonma.gov' ([Errno 8] nodename nor servname provided, or not known)"))
+2025-10-24 17:31:09 - gis_enrichment - INFO - Completed enrichment: 30 listings
+2025-10-24 17:31:09 - dev_pipeline - INFO - Enriched 30 listings with GIS data
+2025-10-24 17:31:09 - dev_pipeline - INFO - 
+============================================================
+2025-10-24 17:31:09 - dev_pipeline - INFO - STAGE 3: CLASSIFICATION
+2025-10-24 17:31:09 - dev_pipeline - INFO - ============================================================
+2025-10-24 17:31:09 - llm_classifier - INFO - Classifying: 371 Cherry St, Newton, MA 02465
+2025-10-24 17:31:11 - llm_classifier - INFO - Classifying: 42 Lindbergh Ave, Newton, MA 02465
+2025-10-24 17:31:13 - llm_classifier - INFO - Classifying: 253 Nahanton St, Newton, MA 02459
+2025-10-24 17:31:14 - llm_classifier - INFO - Classifying: 99 Hancock St, Newton, MA 02466
+2025-10-24 17:31:15 - llm_classifier - INFO - Classifying: 299 Mill St, Newton, MA 02460
+2025-10-24 17:31:17 - llm_classifier - INFO - Classifying: 48 River Ave, Newton, MA 02464
+2025-10-24 17:31:18 - llm_classifier - INFO - Classifying: 66 Forest Ave, West Newton, MA 02465
+2025-10-24 17:31:20 - llm_classifier - INFO - Classifying: 11 Rockland Pl, Newton, MA 02464
+2025-10-24 17:31:21 - llm_classifier - INFO - Classifying: Vintage homes for sale & real estate in Newton, MA
+2025-10-24 17:31:21 - llm_classifier - INFO - Classifying: 37 Harwich Rd, Newton, MA 02467
+2025-10-24 17:31:22 - llm_classifier - INFO - Classified 10/30 listings
+2025-10-24 17:31:22 - llm_classifier - INFO - Classifying: Homes for Sale in Newton, MA with a Large Lot
+2025-10-24 17:31:24 - llm_classifier - INFO - Classifying: Large Yard - Newton, MA Homes for Sale
+2025-10-24 17:31:25 - llm_classifier - INFO - Classifying: Newton, MA Land & Lots for Sale
+2025-10-24 17:31:26 - llm_classifier - INFO - Classifying: Homes for Sale in Newtonville, Newton with a Large Lot
+2025-10-24 17:31:28 - llm_classifier - INFO - Classifying: New Construction Homes for Sale in Newton, MA
+2025-10-24 17:31:29 - llm_classifier - INFO - Classifying: Homes for Sale in West Newton, MA with a Large Lot
+2025-10-24 17:31:30 - llm_classifier - INFO - Classifying: Homes for Sale with 3 Garages in Newton, MA - Realtor.com
+2025-10-24 17:31:31 - llm_classifier - INFO - Classifying: Fixer Upper Homes for Sale in Newton, MA
+2025-10-24 17:31:32 - llm_classifier - INFO - Classifying: Homes for Sale in Newton, MA with a Swimming Pool
+2025-10-24 17:31:35 - llm_classifier - INFO - Classifying: Single Story Homes for Sale in Newton, MA
+2025-10-24 17:31:36 - llm_classifier - INFO - Classified 20/30 listings
+2025-10-24 17:31:36 - llm_classifier - INFO - Classifying: Newton MA Real Estate & Homes For Sale
+2025-10-24 17:31:37 - llm_classifier - INFO - Classifying: New Construction Homes in Newton MA
+2025-10-24 17:31:38 - llm_classifier - INFO - Classifying: New homes for sale & real estate in Newton, MA
+2025-10-24 17:31:39 - llm_classifier - INFO - Classifying: Land for Sale in Newton, MA
+2025-10-24 17:31:40 - llm_classifier - INFO - Classifying: Newton MA Condos & Apartments For Sale - 57 Listings
+2025-10-24 17:31:41 - llm_classifier - INFO - Classifying: Townhouses for Sale in Newton, MA
+2025-10-24 17:31:43 - llm_classifier - INFO - Classifying: West Newton Newton Real Estate & Homes For Sale
+2025-10-24 17:31:44 - llm_classifier - INFO - Classifying: Newton Corner, MA homes for sale & real estate
+2025-10-24 17:31:45 - llm_classifier - INFO - Classifying: New homes for sale & real estate in Nonantum, MA
+2025-10-24 17:31:46 - llm_classifier - INFO - Classifying: Newton Centre, MA homes for sale & real estate
+2025-10-24 17:31:47 - llm_classifier - INFO - Classified 30/30 listings
+2025-10-24 17:31:47 - llm_classifier - INFO - Completed classification: 30 listings
+2025-10-24 17:31:47 - dev_pipeline - INFO - Classified 30 listings
+2025-10-24 17:31:47 - llm_classifier - INFO - Filtered 0 development opportunities from 30 listings
+2025-10-24 17:31:47 - dev_pipeline - INFO - Found 0 development opportunities
+2025-10-24 17:31:47 - dev_pipeline - INFO - 
+============================================================
+2025-10-24 17:31:47 - dev_pipeline - INFO - STAGE 4: SAVING RESULTS & UPLOADING TO SHEETS
+2025-10-24 17:31:47 - dev_pipeline - INFO - ============================================================
+2025-10-24 17:31:47 - anil_project - INFO - Saved 30 records to /Users/koushikramalingam/Desktop/Anil_Project/data/classified_listings.csv
+2025-10-24 17:31:47 - anil_project - INFO - Saved 30 records to /Users/koushikramalingam/Desktop/Anil_Project/data/classified_listings.json
+2025-10-24 17:31:47 - dev_pipeline - INFO - Initializing Google Sheets uploader...
+2025-10-24 17:31:47 - dev_pipeline - INFO - ✓ Uploader ready, uploading 30 listings...
+2025-10-24 17:31:56 - dev_pipeline - INFO - ✓ Google Sheets upload successful (30 listings)
+2025-10-24 17:31:56 - dev_pipeline - INFO - 
+============================================================
+2025-10-24 17:31:56 - dev_pipeline - INFO - STAGE 5: SENDING ALERTS
+2025-10-24 17:31:56 - dev_pipeline - INFO - ============================================================
+2025-10-24 17:31:56 - dev_pipeline - INFO - No high-value opportunities found - sending scan completion summary
+2025-10-24 17:31:58 - dev_pipeline - INFO - ✓ Scan completion email sent
+2025-10-24 17:31:58 - dev_pipeline - INFO - 
+============================================================
+2025-10-24 17:31:58 - dev_pipeline - INFO - STAGE 6: SAVING TO HISTORICAL DATABASE
+2025-10-24 17:31:58 - dev_pipeline - INFO - ============================================================
+2025-10-24 17:31:58 - dev_pipeline - INFO - ✓ Database saved: 4 new, 26 updated, 30 classifications
+2025-10-24 17:31:58 - dev_pipeline - INFO - ✓ Historical database now contains:
+2025-10-24 17:31:58 - dev_pipeline - INFO -   - 33 total properties
+2025-10-24 17:31:58 - dev_pipeline - INFO -   - 0 high-value opportunities (last 30 days)
+2025-10-24 17:31:58 - dev_pipeline - INFO -   - 7 scan runs (last 30 days)
+2025-10-24 17:31:58 - dev_pipeline - INFO - 
+============================================================
+2025-10-24 17:31:58 - dev_pipeline - INFO - STAGE 7: GENERATING MAP VISUALIZATION
+2025-10-24 17:31:58 - dev_pipeline - INFO - ============================================================
+2025-10-24 17:31:58 - dev_pipeline - INFO - ✓ Added 33 properties to map:
+2025-10-24 17:31:58 - dev_pipeline - INFO -   - Excellent (🔴): 0
+2025-10-24 17:31:58 - dev_pipeline - INFO -   - Good (🟠): 0
+2025-10-24 17:31:58 - dev_pipeline - INFO -   - Fair (🟡): 0
+2025-10-24 17:31:58 - dev_pipeline - INFO -   - Low (🟢): 33
+2025-10-24 17:31:58 - dev_pipeline - INFO - ✓ Heatmap layer added
+2025-10-24 17:31:58 - dev_pipeline - INFO - ✓ Layer controls added
+2025-10-24 17:31:58 - dev_pipeline - INFO - ✓ Main map saved: data/maps/latest_map.html
+2025-10-24 17:31:58 - dev_pipeline - INFO - ✓ Map statistics:
+2025-10-24 17:31:58 - dev_pipeline - INFO -   - Total: 33
+2025-10-24 17:31:58 - dev_pipeline - INFO -   - Avg score: 7.5/100
+2025-10-24 17:31:58 - dev_pipeline - INFO -   - Range: 0.0-47.5
+2025-10-24 17:31:58 - dev_pipeline - INFO - 
+============================================================
+2025-10-24 17:31:58 - dev_pipeline - INFO - PIPELINE SUMMARY
+2025-10-24 17:31:58 - dev_pipeline - INFO - ============================================================
+2025-10-24 17:31:58 - dev_pipeline - INFO - Query: Newton MA teardown single family home large lot underbuilt
+2025-10-24 17:31:58 - dev_pipeline - INFO - Location: Newton, MA
+2025-10-24 17:31:58 - dev_pipeline - INFO - Duration: 144.2 seconds
+2025-10-24 17:31:58 - dev_pipeline - INFO - 
+Results:
+2025-10-24 17:31:58 - dev_pipeline - INFO -   Total Listings: 30
+2025-10-24 17:31:58 - dev_pipeline - INFO -   Classified: 30
+2025-10-24 17:31:58 - dev_pipeline - INFO -   Development Opportunities: 0
+2025-10-24 17:31:58 - dev_pipeline - INFO - 
+Classification Breakdown:
+2025-10-24 17:31:58 - dev_pipeline - INFO -   potential: 5
+2025-10-24 17:31:58 - dev_pipeline - INFO -   development: 3
+2025-10-24 17:31:58 - dev_pipeline - INFO -   no: 22
+2025-10-24 17:31:58 - dev_pipeline - INFO - 
+============================================================
+2025-10-24 17:31:58 - dev_pipeline - INFO - Pipeline completed successfully!
+2025-10-24 17:31:58 - dev_pipeline - INFO - ============================================================

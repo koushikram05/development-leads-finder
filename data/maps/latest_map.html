@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_b4a926cce4a2c68791d33e3a8e2b44d1 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@main/folium/templates/leaflet_heat.min.js"></script>
+</head>
+<body>
+    
+    
+        <div style="position: fixed; 
+                    top: 10px; left: 50px; width: 300px; height: auto;
+                    background-color: white; border:2px solid grey; z-index:9999; 
+                    font-size:16px; font-weight: bold; padding: 10px;
+                    border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.2);">
+            📍 Development Opportunities - Newton, MA
+            <br><small style="font-weight: normal; font-size: 12px; color: #666;">
+                33 properties | Updated: 2025-10-24 17:31
+            </small>
+        </div>
+        
+    
+            <div class="folium-map" id="map_b4a926cce4a2c68791d33e3a8e2b44d1" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_b4a926cce4a2c68791d33e3a8e2b44d1 = L.map(
+                "map_b4a926cce4a2c68791d33e3a8e2b44d1",
+                {
+                    center: [42.3314, -71.2045],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 12,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_d51ec2424885e528bd13ce210569a74c = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_d51ec2424885e528bd13ce210569a74c.addTo(map_b4a926cce4a2c68791d33e3a8e2b44d1);
+        
+    
+            var feature_group_a7ecb54bd800da6ae595edd12ca0f979 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_c63e0fa0165541ce9de44bef18ff1c18 = L.marker(
+                [42.3530061, -71.2267139],
+                {
+}
+            ).addTo(feature_group_a7ecb54bd800da6ae595edd12ca0f979);
+        
+    
+            var icon_754223e9a2dfc9d30171dccea5efce94 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3ee4bfa5fd11e94eb9c5960025392a41 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f82164b090c2e9766abbca33374e16c9 = $(`<div id="html_f82164b090c2e9766abbca33374e16c9" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; width: 280px; font-size: 13px;">             <h4 style="margin: 0 0 10px 0; color: #333; border-bottom: 2px solid #ddd; padding-bottom: 8px;">                 42 Lindbergh Ave, Newton, MA 02465             </h4>                          <table style="width: 100%; border-collapse: collapse; margin-bottom: 10px;">                 <tr style="background: #f9f9f9;">                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Score:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">                         <strong>47.5/100</strong> 🟢 LOW                     </td>                 </tr>                 <tr>                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Price:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">N/A</td>                 </tr>                 <tr style="background: #f9f9f9;">                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Lot Size:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">N/A</td>                 </tr>                 <tr>                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Year Built:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">N/A</td>                 </tr>             </table>                          <div style="background: #f0f0f0; padding: 8px; border-radius: 4px; margin-bottom: 10px;">                 <strong style="color: #333;">Why This Score?</strong>                 <p style="margin: 5px 0 0 0; font-size: 12px; color: #555; line-height: 1.4;">                     No explanation provided                 </p>             </div>                          <div style="text-align: center; padding-top: 8px; border-top: 1px solid #eee;">                 <small style="color: #666;">Click address for more details</small>             </div>         </div>         </div>`)[0];
+                popup_3ee4bfa5fd11e94eb9c5960025392a41.setContent(html_f82164b090c2e9766abbca33374e16c9);
+            
+        
+
+        marker_c63e0fa0165541ce9de44bef18ff1c18.bindPopup(popup_3ee4bfa5fd11e94eb9c5960025392a41)
+        ;
+
+        
+    
+    
+            marker_c63e0fa0165541ce9de44bef18ff1c18.bindTooltip(
+                `<div>
+                     42 Lindbergh Ave, Newton, MA 02465 - Score: 47.5
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c63e0fa0165541ce9de44bef18ff1c18.setIcon(icon_754223e9a2dfc9d30171dccea5efce94);
+            
+    
+            var marker_e3f84ddd4e9654f80c607aba63c87370 = L.marker(
+                [42.3002915, -71.1992017],
+                {
+}
+            ).addTo(feature_group_a7ecb54bd800da6ae595edd12ca0f979);
+        
+    
+            var icon_dfc9df155355cbc346fc04ce6b59bae6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_52338df919f1d78d7634209fcfb118f4 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_592974ae8d6b0694e5eba5c4ad6f7076 = $(`<div id="html_592974ae8d6b0694e5eba5c4ad6f7076" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; width: 280px; font-size: 13px;">             <h4 style="margin: 0 0 10px 0; color: #333; border-bottom: 2px solid #ddd; padding-bottom: 8px;">                 253 Nahanton St, Newton, MA 02459             </h4>                          <table style="width: 100%; border-collapse: collapse; margin-bottom: 10px;">                 <tr style="background: #f9f9f9;">                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Score:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">                         <strong>0.0/100</strong> 🟢 LOW                     </td>                 </tr>                 <tr>                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Price:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">$9,000</td>                 </tr>                 <tr style="background: #f9f9f9;">                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Lot Size:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">N/A</td>                 </tr>                 <tr>                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Year Built:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">N/A</td>                 </tr>             </table>                          <div style="background: #f0f0f0; padding: 8px; border-radius: 4px; margin-bottom: 10px;">                 <strong style="color: #333;">Why This Score?</strong>                 <p style="margin: 5px 0 0 0; font-size: 12px; color: #555; line-height: 1.4;">                     No explanation provided                 </p>             </div>                          <div style="text-align: center; padding-top: 8px; border-top: 1px solid #eee;">                 <small style="color: #666;">Click address for more details</small>             </div>         </div>         </div>`)[0];
+                popup_52338df919f1d78d7634209fcfb118f4.setContent(html_592974ae8d6b0694e5eba5c4ad6f7076);
+            
+        
+
+        marker_e3f84ddd4e9654f80c607aba63c87370.bindPopup(popup_52338df919f1d78d7634209fcfb118f4)
+        ;
+
+        
+    
+    
+            marker_e3f84ddd4e9654f80c607aba63c87370.bindTooltip(
+                `<div>
+                     253 Nahanton St, Newton, MA 02459 - Score: 0.0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e3f84ddd4e9654f80c607aba63c87370.setIcon(icon_dfc9df155355cbc346fc04ce6b59bae6);
+            
+    
+            var marker_399e1151b308216a060f588a7936bc6e = L.marker(
+                [42.3517945, -71.2297122],
+                {
+}
+            ).addTo(feature_group_a7ecb54bd800da6ae595edd12ca0f979);
+        
+    
+            var icon_470977b4f81c1d02afc827f084ae8faa = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ae0faa16f93703feff81a1e287cdaf00 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5d360c84ae7a59bac7ebbe4dea471073 = $(`<div id="html_5d360c84ae7a59bac7ebbe4dea471073" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; width: 280px; font-size: 13px;">             <h4 style="margin: 0 0 10px 0; color: #333; border-bottom: 2px solid #ddd; padding-bottom: 8px;">                 371 Cherry St, Newton, MA 02465             </h4>                          <table style="width: 100%; border-collapse: collapse; margin-bottom: 10px;">                 <tr style="background: #f9f9f9;">                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Score:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">                         <strong>21.0/100</strong> 🟢 LOW                     </td>                 </tr>                 <tr>                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Price:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">N/A</td>                 </tr>                 <tr style="background: #f9f9f9;">                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Lot Size:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">N/A</td>                 </tr>                 <tr>                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Year Built:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">N/A</td>                 </tr>             </table>                          <div style="background: #f0f0f0; padding: 8px; border-radius: 4px; margin-bottom: 10px;">                 <strong style="color: #333;">Why This Score?</strong>                 <p style="margin: 5px 0 0 0; font-size: 12px; color: #555; line-height: 1.4;">                     No explanation provided                 </p>             </div>                          <div style="text-align: center; padding-top: 8px; border-top: 1px solid #eee;">                 <small style="color: #666;">Click address for more details</small>             </div>         </div>         </div>`)[0];
+                popup_ae0faa16f93703feff81a1e287cdaf00.setContent(html_5d360c84ae7a59bac7ebbe4dea471073);
+            
+        
+
+        marker_399e1151b308216a060f588a7936bc6e.bindPopup(popup_ae0faa16f93703feff81a1e287cdaf00)
+        ;
+
+        
+    
+    
+            marker_399e1151b308216a060f588a7936bc6e.bindTooltip(
+                `<div>
+                     371 Cherry St, Newton, MA 02465 - Score: 21.0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_399e1151b308216a060f588a7936bc6e.setIcon(icon_470977b4f81c1d02afc827f084ae8faa);
+            
+    
+            var marker_267a7855e5b9706e3fa7b377d34bb10b = L.marker(
+                [42.3431734, -71.2510759],
+                {
+}
+            ).addTo(feature_group_a7ecb54bd800da6ae595edd12ca0f979);
+        
+    
+            var icon_64dce2db58e2536486d79ab44b6b998f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ff6852a0f52ddcf022d68713556e62c7 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4cce337194d1f144b6de15955efb27ab = $(`<div id="html_4cce337194d1f144b6de15955efb27ab" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; width: 280px; font-size: 13px;">             <h4 style="margin: 0 0 10px 0; color: #333; border-bottom: 2px solid #ddd; padding-bottom: 8px;">                 99 Hancock St, Newton, MA 02466             </h4>                          <table style="width: 100%; border-collapse: collapse; margin-bottom: 10px;">                 <tr style="background: #f9f9f9;">                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Score:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">                         <strong>0.0/100</strong> 🟢 LOW                     </td>                 </tr>                 <tr>                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Price:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">$5,900</td>                 </tr>                 <tr style="background: #f9f9f9;">                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Lot Size:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">N/A</td>                 </tr>                 <tr>                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Year Built:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">N/A</td>                 </tr>             </table>                          <div style="background: #f0f0f0; padding: 8px; border-radius: 4px; margin-bottom: 10px;">                 <strong style="color: #333;">Why This Score?</strong>                 <p style="margin: 5px 0 0 0; font-size: 12px; color: #555; line-height: 1.4;">                     No explanation provided                 </p>             </div>                          <div style="text-align: center; padding-top: 8px; border-top: 1px solid #eee;">                 <small style="color: #666;">Click address for more details</small>             </div>         </div>         </div>`)[0];
+                popup_ff6852a0f52ddcf022d68713556e62c7.setContent(html_4cce337194d1f144b6de15955efb27ab);
+            
+        
+
+        marker_267a7855e5b9706e3fa7b377d34bb10b.bindPopup(popup_ff6852a0f52ddcf022d68713556e62c7)
+        ;
+
+        
+    
+    
+            marker_267a7855e5b9706e3fa7b377d34bb10b.bindTooltip(
+                `<div>
+                     99 Hancock St, Newton, MA 02466 - Score: 0.0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_267a7855e5b9706e3fa7b377d34bb10b.setIcon(icon_64dce2db58e2536486d79ab44b6b998f);
+            
+    
+            var marker_f3f049b816d288d6068e05c092a611e3 = L.marker(
+                [42.3432108, -71.2055362],
+                {
+}
+            ).addTo(feature_group_a7ecb54bd800da6ae595edd12ca0f979);
+        
+    
+            var icon_49c9f22f1ccb219d6ba635fa0e2a52d6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_43ca8103cf774a10dcfeffc9a7809d67 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f3a39f543b1021d08f0fef359436e479 = $(`<div id="html_f3a39f543b1021d08f0fef359436e479" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; width: 280px; font-size: 13px;">             <h4 style="margin: 0 0 10px 0; color: #333; border-bottom: 2px solid #ddd; padding-bottom: 8px;">                 299 Mill St, Newton, MA 02460             </h4>                          <table style="width: 100%; border-collapse: collapse; margin-bottom: 10px;">                 <tr style="background: #f9f9f9;">                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Score:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">                         <strong>0.0/100</strong> 🟢 LOW                     </td>                 </tr>                 <tr>                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Price:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">$6,800</td>                 </tr>                 <tr style="background: #f9f9f9;">                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Lot Size:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">N/A</td>                 </tr>                 <tr>                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Year Built:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">N/A</td>                 </tr>             </table>                          <div style="background: #f0f0f0; padding: 8px; border-radius: 4px; margin-bottom: 10px;">                 <strong style="color: #333;">Why This Score?</strong>                 <p style="margin: 5px 0 0 0; font-size: 12px; color: #555; line-height: 1.4;">                     No explanation provided                 </p>             </div>                          <div style="text-align: center; padding-top: 8px; border-top: 1px solid #eee;">                 <small style="color: #666;">Click address for more details</small>             </div>         </div>         </div>`)[0];
+                popup_43ca8103cf774a10dcfeffc9a7809d67.setContent(html_f3a39f543b1021d08f0fef359436e479);
+            
+        
+
+        marker_f3f049b816d288d6068e05c092a611e3.bindPopup(popup_43ca8103cf774a10dcfeffc9a7809d67)
+        ;
+
+        
+    
+    
+            marker_f3f049b816d288d6068e05c092a611e3.bindTooltip(
+                `<div>
+                     299 Mill St, Newton, MA 02460 - Score: 0.0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f3f049b816d288d6068e05c092a611e3.setIcon(icon_49c9f22f1ccb219d6ba635fa0e2a52d6);
+            
+    
+            var marker_2b836192faeed8fded4545bd1418d8d9 = L.marker(
+                [42.3197484, -71.2142086],
+                {
+}
+            ).addTo(feature_group_a7ecb54bd800da6ae595edd12ca0f979);
+        
+    
+            var icon_e3f06b02e9a77ad0e035489da258e289 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b94cef19178dfb0e1a9bd8b0caccb77a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_826b78e8c4232af71303e69ed6a99d85 = $(`<div id="html_826b78e8c4232af71303e69ed6a99d85" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; width: 280px; font-size: 13px;">             <h4 style="margin: 0 0 10px 0; color: #333; border-bottom: 2px solid #ddd; padding-bottom: 8px;">                 48 Woodward St, Newton, MA 02461             </h4>                          <table style="width: 100%; border-collapse: collapse; margin-bottom: 10px;">                 <tr style="background: #f9f9f9;">                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Score:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">                         <strong>0.0/100</strong> 🟢 LOW                     </td>                 </tr>                 <tr>                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Price:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">$9,950</td>                 </tr>                 <tr style="background: #f9f9f9;">                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Lot Size:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">N/A</td>                 </tr>                 <tr>                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Year Built:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">N/A</td>                 </tr>             </table>                          <div style="background: #f0f0f0; padding: 8px; border-radius: 4px; margin-bottom: 10px;">                 <strong style="color: #333;">Why This Score?</strong>                 <p style="margin: 5px 0 0 0; font-size: 12px; color: #555; line-height: 1.4;">                     No explanation provided                 </p>             </div>                          <div style="text-align: center; padding-top: 8px; border-top: 1px solid #eee;">                 <small style="color: #666;">Click address for more details</small>             </div>         </div>         </div>`)[0];
+                popup_b94cef19178dfb0e1a9bd8b0caccb77a.setContent(html_826b78e8c4232af71303e69ed6a99d85);
+            
+        
+
+        marker_2b836192faeed8fded4545bd1418d8d9.bindPopup(popup_b94cef19178dfb0e1a9bd8b0caccb77a)
+        ;
+
+        
+    
+    
+            marker_2b836192faeed8fded4545bd1418d8d9.bindTooltip(
+                `<div>
+                     48 Woodward St, Newton, MA 02461 - Score: 0.0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2b836192faeed8fded4545bd1418d8d9.setIcon(icon_e3f06b02e9a77ad0e035489da258e289);
+            
+    
+            var marker_c4ac8d007d5dffec8bdce4ee5701733e = L.marker(
+                [42.3169804, -71.2223923],
+                {
+}
+            ).addTo(feature_group_a7ecb54bd800da6ae595edd12ca0f979);
+        
+    
+            var icon_dd423225344e89a38d9f73a384e52aa0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_dc192936994c8204f11576aa2891babb = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_dbd157f9b58e6a92cf6e1b1b85c795ab = $(`<div id="html_dbd157f9b58e6a92cf6e1b1b85c795ab" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; width: 280px; font-size: 13px;">             <h4 style="margin: 0 0 10px 0; color: #333; border-bottom: 2px solid #ddd; padding-bottom: 8px;">                 11 Rockland Pl, Newton, MA 02464             </h4>                          <table style="width: 100%; border-collapse: collapse; margin-bottom: 10px;">                 <tr style="background: #f9f9f9;">                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Score:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">                         <strong>0.0/100</strong> 🟢 LOW                     </td>                 </tr>                 <tr>                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Price:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">$4,950</td>                 </tr>                 <tr style="background: #f9f9f9;">                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Lot Size:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">N/A</td>                 </tr>                 <tr>                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Year Built:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">N/A</td>                 </tr>             </table>                          <div style="background: #f0f0f0; padding: 8px; border-radius: 4px; margin-bottom: 10px;">                 <strong style="color: #333;">Why This Score?</strong>                 <p style="margin: 5px 0 0 0; font-size: 12px; color: #555; line-height: 1.4;">                     No explanation provided                 </p>             </div>                          <div style="text-align: center; padding-top: 8px; border-top: 1px solid #eee;">                 <small style="color: #666;">Click address for more details</small>             </div>         </div>         </div>`)[0];
+                popup_dc192936994c8204f11576aa2891babb.setContent(html_dbd157f9b58e6a92cf6e1b1b85c795ab);
+            
+        
+
+        marker_c4ac8d007d5dffec8bdce4ee5701733e.bindPopup(popup_dc192936994c8204f11576aa2891babb)
+        ;
+
+        
+    
+    
+            marker_c4ac8d007d5dffec8bdce4ee5701733e.bindTooltip(
+                `<div>
+                     11 Rockland Pl, Newton, MA 02464 - Score: 0.0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c4ac8d007d5dffec8bdce4ee5701733e.setIcon(icon_dd423225344e89a38d9f73a384e52aa0);
+            
+    
+            var marker_990344625591201aaeb581816f91228f = L.marker(
+                [42.3116833, -71.2264709],
+                {
+}
+            ).addTo(feature_group_a7ecb54bd800da6ae595edd12ca0f979);
+        
+    
+            var icon_c626c51df616f1586128c43972d62982 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d7f6f5ab8147848d6e228bf94b5b51fa = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_54846feab527e7945f74232058c71ab2 = $(`<div id="html_54846feab527e7945f74232058c71ab2" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; width: 280px; font-size: 13px;">             <h4 style="margin: 0 0 10px 0; color: #333; border-bottom: 2px solid #ddd; padding-bottom: 8px;">                 48 River Ave, Newton, MA 02464             </h4>                          <table style="width: 100%; border-collapse: collapse; margin-bottom: 10px;">                 <tr style="background: #f9f9f9;">                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Score:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">                         <strong>0.0/100</strong> 🟢 LOW                     </td>                 </tr>                 <tr>                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Price:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">$4,900</td>                 </tr>                 <tr style="background: #f9f9f9;">                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Lot Size:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">N/A</td>                 </tr>                 <tr>                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Year Built:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">N/A</td>                 </tr>             </table>                          <div style="background: #f0f0f0; padding: 8px; border-radius: 4px; margin-bottom: 10px;">                 <strong style="color: #333;">Why This Score?</strong>                 <p style="margin: 5px 0 0 0; font-size: 12px; color: #555; line-height: 1.4;">                     No explanation provided                 </p>             </div>                          <div style="text-align: center; padding-top: 8px; border-top: 1px solid #eee;">                 <small style="color: #666;">Click address for more details</small>             </div>         </div>         </div>`)[0];
+                popup_d7f6f5ab8147848d6e228bf94b5b51fa.setContent(html_54846feab527e7945f74232058c71ab2);
+            
+        
+
+        marker_990344625591201aaeb581816f91228f.bindPopup(popup_d7f6f5ab8147848d6e228bf94b5b51fa)
+        ;
+
+        
+    
+    
+            marker_990344625591201aaeb581816f91228f.bindTooltip(
+                `<div>
+                     48 River Ave, Newton, MA 02464 - Score: 0.0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_990344625591201aaeb581816f91228f.setIcon(icon_c626c51df616f1586128c43972d62982);
+            
+    
+            var marker_e9ed0c34a3d88a30d77852b8663c8bef = L.marker(
+                [42.3046962, -71.1726864],
+                {
+}
+            ).addTo(feature_group_a7ecb54bd800da6ae595edd12ca0f979);
+        
+    
+            var icon_33cdffe969f2facae93de4010c37517b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_cfa9d64aa62aea55bdb7ab81bb8ef0b2 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_de4fb9891e5718e206139b4b6ad6d62b = $(`<div id="html_de4fb9891e5718e206139b4b6ad6d62b" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; width: 280px; font-size: 13px;">             <h4 style="margin: 0 0 10px 0; color: #333; border-bottom: 2px solid #ddd; padding-bottom: 8px;">                 37 Harwich Rd, Newton, MA 02467             </h4>                          <table style="width: 100%; border-collapse: collapse; margin-bottom: 10px;">                 <tr style="background: #f9f9f9;">                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Score:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">                         <strong>0.0/100</strong> 🟢 LOW                     </td>                 </tr>                 <tr>                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Price:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">$5,800</td>                 </tr>                 <tr style="background: #f9f9f9;">                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Lot Size:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">N/A</td>                 </tr>                 <tr>                     <td style="padding: 6px; border-bottom: 1px solid #eee;"><strong>Year Built:</strong></td>                     <td style="padding: 6px; border-bottom: 1px solid #eee; text-align: right;">N/A</td>                 </tr>             </table>                          <div style="background: #f0f0f0; padding: 8px; border-radius: 4px; margin-bottom: 10px;">                 <strong style="color: #333;">Why This Score?</strong>                 <p style="margin: 5px 0 0 0; font-size: 12px; color: #555; line-height: 1.4;">                     No explanation provided                 </p>             </div>                          <div style="text-align: center; padding-top: 8px; border-top: 1px solid #eee;">                 <small style="color: #666;">Click address for more details</small>             </div>         </div>         </div>`)[0];
+                popup_cfa9d64aa62aea55bdb7ab81bb8ef0b2.setContent(html_de4fb9891e5718e206139b4b6ad6d62b);
+            
+        
+
+        marker_e9ed0c34a3d88a30d77852b8663c8bef.bindPopup(popup_cfa9d64aa62aea55bdb7ab81bb8ef0b2)
+        ;
+
+        
+    
+    
+            marker_e9ed0c34a3d88a30d77852b8663c8bef.bindTooltip(
+                `<div>
+                     37 Harwich Rd, Newton, MA 02467 - Score: 0.0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e9ed0c34a3d88a30d77852b8663c8bef.setIcon(icon_33cdffe969f2facae93de4010c37517b);
+            
+    
+            feature_group_a7ecb54bd800da6ae595edd12ca0f979.addTo(map_b4a926cce4a2c68791d33e3a8e2b44d1);
+        
+    
+            var feature_group_b1caad8865c1756aad0a6f53c381faef = L.featureGroup(
+                {
+}
+            );
+        
+    
+            feature_group_b1caad8865c1756aad0a6f53c381faef.addTo(map_b4a926cce4a2c68791d33e3a8e2b44d1);
+        
+    
+            var feature_group_6eb1a2897364686189355525e81d3cdc = L.featureGroup(
+                {
+}
+            );
+        
+    
+            feature_group_6eb1a2897364686189355525e81d3cdc.addTo(map_b4a926cce4a2c68791d33e3a8e2b44d1);
+        
+    
+            var feature_group_39ba04a4afbf6ead93178afce3360f40 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var heat_map_2758c47a73ccedd1bdcba2b7533fbfa5 = L.heatLayer(
+                [[42.3530061, -71.2267139, 0.475], [42.3002915, -71.1992017, 0.0], [42.3517945, -71.2297122, 0.21], [42.3431734, -71.2510759, 0.0], [42.3432108, -71.2055362, 0.0], [42.3197484, -71.2142086, 0.0], [42.3169804, -71.2223923, 0.0], [42.3116833, -71.2264709, 0.0], [42.3046962, -71.1726864, 0.0]],
+                {
+  "minOpacity": 0.2,
+  "maxZoom": 1,
+  "radius": 25,
+  "blur": 15,
+}
+            );
+        
+    
+            heat_map_2758c47a73ccedd1bdcba2b7533fbfa5.addTo(feature_group_39ba04a4afbf6ead93178afce3360f40);
+        
+    
+            feature_group_39ba04a4afbf6ead93178afce3360f40.addTo(map_b4a926cce4a2c68791d33e3a8e2b44d1);
+        
+    
+            var layer_control_c156b85dbb392a0f3b51f8dc742406ab_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_d51ec2424885e528bd13ce210569a74c,
+                },
+                overlays :  {
+                    "All Markers (29 properties)" : feature_group_a7ecb54bd800da6ae595edd12ca0f979,
+                    "High-Value Only (\u226570)" : feature_group_b1caad8865c1756aad0a6f53c381faef,
+                    "Excellent (\u226580)" : feature_group_6eb1a2897364686189355525e81d3cdc,
+                    "Development Score Heatmap" : feature_group_39ba04a4afbf6ead93178afce3360f40,
+                },
+            };
+            let layer_control_c156b85dbb392a0f3b51f8dc742406ab = L.control.layers(
+                layer_control_c156b85dbb392a0f3b51f8dc742406ab_layers.base_layers,
+                layer_control_c156b85dbb392a0f3b51f8dc742406ab_layers.overlays,
+                {
+  "position": "topleft",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_b4a926cce4a2c68791d33e3a8e2b44d1);
+
+        
+</script>
+</html>

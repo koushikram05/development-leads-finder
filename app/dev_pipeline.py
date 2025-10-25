@@ -294,6 +294,65 @@ class DevelopmentPipeline:
             import traceback
             self.logger.debug(traceback.format_exc())
         
+        # Stage 7: Generate Map Visualization
+        self.logger.info("\n" + "=" * 60)
+        self.logger.info("STAGE 7: GENERATING MAP VISUALIZATION")
+        self.logger.info("=" * 60)
+        
+        try:
+            from app.integrations.map_generator import MapGenerator
+            from pathlib import Path
+            
+            if classified_listings:
+                # Create output directory
+                map_dir = Path("data/maps")
+                map_dir.mkdir(parents=True, exist_ok=True)
+                
+                # Get all recent properties from database for mapping
+                db = HistoricalDatabaseManager()
+                map_properties = db.get_recent_opportunities(days=30, min_score=0)
+                
+                if map_properties:
+                    # Create and save maps
+                    map_gen = MapGenerator()
+                    stats_map = map_gen.add_properties(map_properties)
+                    
+                    # Log counts
+                    self.logger.info(f"✓ Added {len(map_properties)} properties to map:")
+                    self.logger.info(f"  - Excellent (🔴): {stats_map['excellent']}")
+                    self.logger.info(f"  - Good (🟠): {stats_map['good']}")
+                    self.logger.info(f"  - Fair (🟡): {stats_map['fair']}")
+                    self.logger.info(f"  - Low (🟢): {stats_map['low']}")
+                    
+                    # Add heatmap
+                    map_gen.add_heatmap()
+                    self.logger.info(f"✓ Heatmap layer added")
+                    
+                    # Add layer controls
+                    map_gen.add_layer_control()
+                    self.logger.info(f"✓ Layer controls added")
+                    
+                    # Save maps
+                    main_map = map_dir / "latest_map.html"
+                    map_path = map_gen.save_map(str(main_map))
+                    self.logger.info(f"✓ Main map saved: {main_map}")
+                    
+                    # Generate statistics
+                    map_stats = map_gen.generate_stats()
+                    self.logger.info(f"✓ Map statistics:")
+                    self.logger.info(f"  - Total: {map_stats['total_properties']}")
+                    self.logger.info(f"  - Avg score: {map_stats['average_score']:.1f}/100")
+                    self.logger.info(f"  - Range: {map_stats['min_score']:.1f}-{map_stats['max_score']:.1f}")
+                else:
+                    self.logger.info("⚠ No geocoded properties available for mapping")
+            else:
+                self.logger.info("⚠ No classified listings available for mapping")
+                
+        except Exception as e:
+            self.logger.warning(f"Map generation failed (non-critical): {e}")
+            import traceback
+            self.logger.debug(traceback.format_exc())
+        
         if development_opportunities:
             save_to_csv(development_opportunities, 'development_opportunities.csv')
             save_to_json(development_opportunities, 'development_opportunities.json')
