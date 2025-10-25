@@ -168,6 +168,48 @@ class DevelopmentPipeline:
             )
             self.logger.info(f"Found {len(development_opportunities)} development opportunities")
         
+        # Stage 3.5: ROI Scoring & Financial Analysis (NEW)
+        if classified_listings:
+            self.logger.info("\n" + "=" * 60)
+            self.logger.info("STAGE 3.5: ROI SCORING & FINANCIAL ANALYSIS")
+            self.logger.info("=" * 60)
+            
+            try:
+                from app.integrations.roi_calculator import EnhancedLLMClassifier
+                
+                roi_classifier = EnhancedLLMClassifier()
+                roi_count = 0
+                high_roi_count = 0
+                
+                # Add ROI calculations to each classified listing
+                for listing in classified_listings:
+                    # Create property data dict for ROI calculation
+                    property_data = {
+                        'address': listing.get('address'),
+                        'price': listing.get('price'),
+                        'last_price': listing.get('price'),
+                        'lot_size': listing.get('lot_size'),
+                        'square_feet': listing.get('square_feet'),
+                        'zoning_type': listing.get('zoning_type')
+                    }
+                    
+                    # Add ROI to classification
+                    listing = roi_classifier.add_roi_to_classification(listing, property_data)
+                    roi_count += 1
+                    
+                    # Track high-ROI opportunities
+                    if listing.get('roi_percentage', 0) >= 30:
+                        high_roi_count += 1
+                
+                self.logger.info(f"✓ ROI calculated for {roi_count} listings")
+                if high_roi_count > 0:
+                    self.logger.info(f"  - {high_roi_count} with excellent ROI potential (30%+)")
+                
+            except Exception as e:
+                self.logger.warning(f"ROI scoring failed (non-critical): {e}")
+                import traceback
+                self.logger.debug(traceback.format_exc())
+        
         # Stage 4: Save Results & Upload to Google Sheets
         self.logger.info("\n" + "=" * 60)
         self.logger.info("STAGE 4: SAVING RESULTS & UPLOADING TO SHEETS")

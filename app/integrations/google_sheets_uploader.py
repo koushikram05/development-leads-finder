@@ -273,11 +273,12 @@ class GoogleSheetsUploader:
     
     def _get_headers(self, listings: List[Dict]) -> List[str]:
         """Extract column headers from listings, prioritizing key fields"""
-        # Priority headers to show first
+        # Priority headers to show first (includes ROI columns)
         priority_headers = [
             'address', 'city', 'price', 'beds', 'baths', 'sqft',
             'lot_size', 'year_built', 'zoning', 'label',
             'development_score', 'confidence', 'explanation',
+            'buildable_sqft', 'estimated_profit', 'roi_percentage', 'roi_score', 'roi_confidence',
             'latitude', 'longitude', 'url', 'source', 'first_seen'
         ]
         
@@ -299,8 +300,15 @@ class GoogleSheetsUploader:
             value = listing.get(header, '')
             
             # Format specific fields
-            if header in ['price', 'sqft', 'lot_size', 'development_score']:
+            if header in ['price', 'sqft', 'lot_size', 'development_score', 'buildable_sqft', 'estimated_profit']:
                 if isinstance(value, (int, float)):
+                    value = str(value)
+            elif header in ['roi_percentage', 'roi_score', 'roi_confidence']:
+                if isinstance(value, (int, float)):
+                    if header == 'roi_percentage':
+                        value = f"{value:.1f}%"
+                    else:
+                        value = f"{value:.0f}"
                     value = str(value)
             elif header in ['latitude', 'longitude']:
                 if isinstance(value, float):

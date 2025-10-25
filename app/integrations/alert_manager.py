@@ -263,13 +263,19 @@ class AlertManager:
             explanation = opp.get('explanation', '')[:150]
             price = opp.get('price', 'N/A')
             label = opp.get('label', 'N/A')
+            roi_pct = opp.get('roi_percentage')
+            roi_score = opp.get('roi_score')
+            
+            roi_display = ""
+            if roi_pct is not None:
+                roi_display = f" | ROI: <strong style='color: #2d7a3e;'>{roi_pct:.1f}%</strong> (Score: {roi_score:.0f}/100)"
             
             opportunities_html += f"""
             <tr>
                 <td style="padding: 12px; border-bottom: 1px solid #eee;">
                     <strong style="font-size: 16px; color: #1a5f7a;">{i}. {address}</strong>
                     <br/>
-                    <small style="color: #666;">Score: <strong>{score:.1f}/100</strong> | Label: <strong>{label}</strong></small>
+                    <small style="color: #666;">Score: <strong>{score:.1f}/100</strong> | Label: <strong>{label}</strong>{roi_display}</small>
                     <br/>
                     <small style="color: #888;">{explanation}...</small>
                     <br/>
