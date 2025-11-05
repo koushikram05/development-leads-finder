@@ -139,18 +139,68 @@ class LLMSearch:
         return None
     
     def _extract_address(self, result: Dict[str, Any]) -> str:
-        """Extract address from search result"""
+        """Extract address from search result - only real property addresses"""
         title = result.get('title', '')
         
         # Address is typically at the start of the title
         # Example: "68 Vernon St, Newton, MA 02458 | MLS# ..."
         import re
-        address_match = re.match(r'^([^|]+)', title)
+        
+        # FIRST: Check if this is a real address or category page
+        if not self._is_real_address(title):
+            return ""
+        
+        # Extract the address part before pipe or colon
+        address_match = re.match(r'^([^|:]+)', title)
         
         if address_match:
             return address_match.group(1).strip()
         
         return ""
+    
+    def _is_real_address(self, text: str) -> bool:
+        """
+        Determine if text is a real property address vs category page
+        
+        Real address pattern: "123 Main St, City, State 12345"
+        Category pages: "Homes for Sale in...", "Land & Lots For Sale", etc
+        """
+        import re
+        
+        # Real address must start with a number (street number)
+        if not re.match(r'^\d+\s+', text):
+            return False
+        
+        # Check for street type indicators after number
+        street_types = ['St', 'Rd', 'Ave', 'Ln', 'Blvd', 'Way', 'Ct', 'Dr', 'Pl', 'Terr', 'Tr', 'Pkwy', 'Circle', 'Cove']
+        has_street_type = any(st in text for st in street_types)
+        
+        if not has_street_type:
+            return False
+        
+        # Exclude category page keywords
+        exclude_keywords = [
+            'for sale in',
+            'homes for sale',
+            'properties for sale',
+            'listings',
+            'browse',
+            'search homes',
+            'land & lots',
+            'new construction homes',
+        ]
+        
+        text_lower = text.lower()
+        for keyword in exclude_keywords:
+            if keyword in text_lower:
+                return False
+        
+        # Must have location info (city, state, zip)
+        has_state = re.search(r',\s*[A-Z]{2}\s*\d{5}', text)
+        if not has_state:
+            return False
+        
+        return True
     
     def search_google_maps(
         self, 

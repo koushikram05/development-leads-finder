@@ -84,15 +84,21 @@ class DevelopmentPipeline:
         
         # Use LLM Search (primary method - fast and reliable)
         self.logger.info("Searching via SerpAPI...")
-        search_queries = [
-            search_query,
-            f"{location} teardown opportunity",
-            f"{location} builder special large lot",
-            f"{location} development opportunity single family"
-        ]
+        
+        # Build address-focused search queries
+        from app.scraper.search_query_builder import SearchQueryBuilder
+        query_builder = SearchQueryBuilder()
+        
+        # Use address-focused queries instead of generic ones
+        search_queries = query_builder.build_address_focused_queries(location)
+        
         search_listings = self.llm_search.search_multiple_queries(search_queries, location)
+        
+        # Filter to keep only real property addresses
+        search_listings = query_builder.extract_real_addresses(search_listings)
+        
         all_listings.extend(search_listings)
-        self.logger.info(f"SerpAPI: Found {len(search_listings)} listings")
+        self.logger.info(f"SerpAPI: Found {len(search_listings)} listings (filtered for real addresses)")
         
         # Optionally use direct scrapers
         if use_scrapers:

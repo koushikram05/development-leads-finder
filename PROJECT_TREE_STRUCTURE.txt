@@ -1,0 +1,388 @@
+DEVELOPMENT LEADS FINDER - PROJECT STRUCTURE (Post Task 5)
+═══════════════════════════════════════════════════════════════════════════
+
+/Anil_Project/
+│
+├── 📋 ROOT CONFIG FILES
+│   ├── .env                           [Environment variables - API keys, credentials]
+│   ├── .env.example                   [Template for .env setup]
+│   ├── requirements.txt                [Python dependencies (pip packages)]
+│   ├── .gitignore                      [Git ignore rules]
+│   └── google_credentials.json         [Google API service account key]
+│
+├── 📂 app/                            [Main Application Code]
+│   ├── __init__.py
+│   │
+│   ├── 🔍 scraper/                   [Web Scraping & Data Collection]
+│   │   ├── __init__.py
+│   │   ├── dev_pipeline.py            [Web scraping pipeline]
+│   │   ├── realtor_scraper.py         [Realtor.com scraper]
+│   │   ├── redfin_scraper.py          [Redfin.com scraper]
+│   │   ├── zillow_scraper.py          [Zillow.com scraper]
+│   │   ├── llm_search.py              [LLM-powered search]
+│   │   └── llm_classifier.py          [LLM classification]
+│   │
+│   ├── 🧠 nlp/                       [NLP & Classification]
+│   │   ├── __init__.py
+│   │   ├── openai_classifier.py       [OpenAI API integration]
+│   │   ├── keyword_detector.py        [Keyword pattern detection]
+│   │   └── nlp_filter.py              [NLP filtering logic]
+│   │
+│   ├── 📍 geo/                       [GIS & Location Analysis]
+│   │   ├── __init__.py
+│   │   ├── gis_enrichment.py          [Geocoding & GIS enrichment]
+│   │   ├── lot_analysis.py            [Lot size & zoning analysis]
+│   │   └── zoning_loader.py           [Zoning regulation loader]
+│   │
+│   ├── 🎯 classifier/                [Classification Logic]
+│   │   ├── __init__.py
+│   │   └── llm_classifier.py          [LLM-based property classifier]
+│   │
+│   ├── 🏗️ enrichment/                [Data Enrichment]
+│   │   ├── __init__.py
+│   │   └── gis_enrichment.py          [GIS data enrichment]
+│   │
+│   ├── 🧮 core/                      [Core Business Logic]
+│   │   ├── __init__.py
+│   │   ├── scoring_engine.py          [Development opportunity scoring]
+│   │   ├── data_merger.py             [Data consolidation & merging]
+│   │   └── scheduler.py               [Pipeline scheduler]
+│   │
+│   ├── 🔗 integrations/              [Third-party Integrations]
+│   │   ├── __init__.py
+│   │   ├── google_sheets_uploader.py  [Google Sheets API integration]
+│   │   ├── alert_manager.py           [Email/Slack notifications]
+│   │   ├── database_manager.py        [SQLite database operations]
+│   │   └── map_generator.py           [Folium map generation]
+│   │
+│   ├── 🛠️ utils/                     [Utility Functions]
+│   │   ├── __init__.py
+│   │   ├── config_loader.py           [Configuration loader]
+│   │   ├── logger.py                  [Logging setup]
+│   │   └── helpers.py                 [Helper functions]
+│   │
+│   ├── dev_pipeline.py                [Main 7-stage pipeline orchestrator]
+│   ├── scheduler.py                   [Task scheduler]
+│   └── utils.py                       [Root utility functions]
+│
+├── 📊 data/                           [Data Storage]
+│   ├── development_leads.db           [SQLite database (33 properties)]
+│   ├── classified_listings.csv        [Classified properties (CSV)]
+│   ├── classified_listings.json       [Classified properties (JSON)]
+│   ├── development_leads.csv          [Dev opportunities (CSV)]
+│   ├── raw_listings.csv               [Raw scrape data (CSV)]
+│   ├── entities.csv                   [Extracted entities (CSV)]
+│   ├── llm_results.csv                [LLM classification results]
+│   ├── sheets_upload_log.txt          [Google Sheets sync log]
+│   │
+│   ├── 🗺️ maps/                      [Map Visualizations]
+│   │   └── latest_map.html            [Interactive Folium map (41 KB)]
+│   │
+│   ├── 📍 zoning_shapefile/           [Zoning GIS Data]
+│   │   ├── zoning_shapefile.shp       [Shapefile geometry]
+│   │   ├── zoning_shapefile.dbf       [Shapefile database]
+│   │   ├── zoning_shapefile.shx       [Shapefile index]
+│   │   └── zoning_shapefile.prj       [Projection info]
+│   │
+│   └── 📝 logs/                       [Pipeline logs]
+│       ├── pipeline_YYYY-MM-DD.log    [Execution logs]
+│       └── error_YYYY-MM-DD.log       [Error logs]
+│
+├── 📋 logs/                           [Application Logs]
+│   ├── app_YYYY-MM-DD.log             [App execution logs]
+│   └── errors_YYYY-MM-DD.log          [Error tracking]
+│
+├── 🧪 Root Test Files
+│   ├── main.py                        [Entry point / manual runner]
+│   ├── test_map_generator.py          [Map generation tests (4 tests, all passing)]
+│   ├── test_database.py               [Database integration tests]
+│   ├── test_alerts.py                 [Alert notification tests]
+│   ├── test_fastapi.py                [API endpoint tests]
+│   ├── verify_env.py                  [Environment setup verification]
+│   └── verify_structure.py            [Project structure verification]
+│
+├── 🔐 .venv/                          [Python Virtual Environment]
+│   ├── bin/
+│   │   ├── python                     [Python interpreter]
+│   │   ├── pip                        [Package installer]
+│   │   ├── activate                   [Activation script]
+│   │   └── [other executables]
+│   ├── lib/
+│   │   └── python3.9/
+│   │       └── site-packages/         [Installed packages]
+│   ├── include/
+│   └── pyvenv.cfg
+│
+├── 📦 .git/                           [Git Version Control]
+│   ├── objects/
+│   ├── refs/
+│   ├── HEAD
+│   └── config
+│
+└── 🔧 check_structure.sh              [Shell script for verification]
+
+
+═══════════════════════════════════════════════════════════════════════════
+                            CONFIGURATION FILES
+═══════════════════════════════════════════════════════════════════════════
+
+.env (Environment Variables)
+─────────────────────────────────────────────────────────────────────────
+SERPAPI_API_KEY=...                    [SerpAPI for Google search]
+OPENAI_API_KEY=...                     [OpenAI GPT API]
+GOOGLE_CREDENTIALS_PATH=./google_credentials.json
+GOOGLE_SHEETS_ID=1JxVvOJGazPYRaKQy-jg8EIH4NQL0Jg4P4hfHAybgTc0
+EMAIL_USER=...                         [Alert email sender]
+EMAIL_PASSWORD=...                     [Email app password]
+TARGET_CITY=Newton, MA
+DATABASE_PATH=./data/development_leads.db
+
+
+requirements.txt (Python Packages)
+─────────────────────────────────────────────────────────────────────────
+Core:
+  - Python 3.9.6
+  - pandas==2.0.3
+  - numpy==1.24.3
+  - requests==2.31.0
+
+APIs & Web:
+  - gspread==5.10.0                    [Google Sheets API]
+  - google-auth-oauthlib==1.0.0
+  - google-auth-httplib2==0.1.1
+  - openai==0.27.8                     [OpenAI API]
+  - python-dotenv==1.0.0
+
+GIS & Geocoding:
+  - shapely==2.0.1
+  - geopandas==0.13.2
+
+Data & Mapping:
+  - folium==0.14.0                     [Interactive maps]
+  - httpx==0.28.1
+
+Scheduling:
+  - APScheduler==3.10.1.post1
+  - pytz==2023.3
+
+Utilities:
+  - python-dateutil==2.8.2
+  - tqdm==4.65.0
+
+
+═══════════════════════════════════════════════════════════════════════════
+                            KEY DATA FLOWS
+═══════════════════════════════════════════════════════════════════════════
+
+7-STAGE PIPELINE (app/dev_pipeline.py)
+─────────────────────────────────────────────────────────────────────────
+Stage 1: Data Collection
+         └─→ app/scraper/ (Realtor, Redfin, Zillow)
+             └─→ data/raw_listings.csv
+
+Stage 2: Enrichment
+         └─→ app/enrichment/gis_enrichment.py
+             └─→ Geocoding + GIS data
+                 └─→ data/classified_listings.csv
+
+Stage 3: Classification
+         └─→ app/nlp/openai_classifier.py
+             └─→ AI analysis of development potential
+                 └─→ data/classified_listings.json
+                     └─→ development_score, label, explanation
+
+Stage 4: Google Sheets Upload
+         └─→ app/integrations/google_sheets_uploader.py
+             └─→ Google Sheets API
+                 └─→ DevelopmentLeads sheet (29 properties)
+
+Stage 5: Email Alerts
+         └─→ app/integrations/alert_manager.py
+             └─→ 3 notifications: Started, Completed, High-Value
+                 └─→ Email notifications to recipient
+
+Stage 6: Database Storage
+         └─→ app/integrations/database_manager.py
+             └─→ SQLite (data/development_leads.db)
+                 └─→ 33 properties, price history, scan logs
+
+Stage 7: Map Generation (Task 4) ✅
+         └─→ app/integrations/map_generator.py
+             └─→ Folium map with:
+                 ├─ 33 properties visualized
+                 ├─ Color-coded markers (Red/Orange/Yellow/Green)
+                 ├─ Heatmap layer
+                 ├─ Interactive popups
+                 └─ Layer controls
+                 └─→ data/maps/latest_map.html
+
+
+STAGE 8: ROI Scoring (Task 5 - NEW) 🆕
+         └─→ app/integrations/roi_calculator.py (TO BE CREATED)
+             └─→ Buildable SF estimation
+             └─→ Development cost calculation
+             └─→ Profit potential analysis
+             └─→ ROI percentage computation
+             └─→ ROI score generation (0-100)
+                 └─→ Google Sheets ROI columns
+                 └─→ Map ROI-based coloring (optional)
+                 └─→ Email alerts with ROI data
+                 └─→ Database ROI persistence
+
+
+═══════════════════════════════════════════════════════════════════════════
+                            FILE PURPOSES SUMMARY
+═══════════════════════════════════════════════════════════════════════════
+
+🔍 DATA COLLECTION
+   scraper/realtor_scraper.py          → Realtor.com listings
+   scraper/redfin_scraper.py           → Redfin listings
+   scraper/zillow_scraper.py           → Zillow listings
+   scraper/llm_search.py               → LLM-powered search
+
+🧠 ANALYSIS & CLASSIFICATION
+   nlp/openai_classifier.py            → GPT classification
+   nlp/keyword_detector.py             → Keyword patterns
+   nlp/nlp_filter.py                   → Advanced filtering
+   classifier/llm_classifier.py        → Classification logic
+   core/scoring_engine.py              → Opportunity scoring
+
+📍 LOCATION & GIS
+   geo/gis_enrichment.py               → Geocoding service
+   geo/lot_analysis.py                 → Lot size calculations
+   geo/zoning_loader.py                → Zoning regulations
+   data/zoning_shapefile/              → Boston area zoning
+
+🗺️ VISUALIZATION
+   integrations/map_generator.py       → Folium maps
+   data/maps/latest_map.html           → Generated map output
+
+📊 DATA STORAGE & SYNC
+   integrations/database_manager.py    → SQLite operations
+   integrations/google_sheets_uploader.py → Google Sheets sync
+   data/development_leads.db           → All property data
+   data/*.csv / *.json                 → Export formats
+
+📧 NOTIFICATIONS
+   integrations/alert_manager.py       → Email/Slack alerts
+   core/scheduler.py                   → Task scheduling
+
+💰 FINANCIAL ANALYSIS (TASK 5)
+   integrations/roi_calculator.py      → ROI calculations (TO CREATE)
+   app/geo/lot_analysis.py             → Buildable SF (enhance)
+   core/scoring_engine.py              → ROI scoring (enhance)
+
+
+═══════════════════════════════════════════════════════════════════════════
+                            EXECUTION FLOW
+═══════════════════════════════════════════════════════════════════════════
+
+MANUAL RUN
+──────────────────────────────────────────────────────────────────────────
+$ python main.py
+  └─→ calls app/dev_pipeline.py
+      └─→ Runs all 7 stages sequentially
+          └─→ Generates all output files
+              └─→ Updates Google Sheets
+                  └─→ Sends email alerts
+                      └─→ Creates map
+                          └─→ Logs completion
+
+
+SCHEDULED RUN
+──────────────────────────────────────────────────────────────────────────
+$ python app/scheduler.py
+  └─→ APScheduler (background)
+      └─→ Runs dev_pipeline at configured intervals
+          └─→ Default: Every 6 hours
+              └─→ Auto-updates map.html
+                  └─→ Auto-sends alerts
+                      └─→ Auto-updates database
+
+
+TESTING
+──────────────────────────────────────────────────────────────────────────
+$ python -m pytest test_*.py
+  ├─→ test_map_generator.py        (4 tests - Map generation)
+  ├─→ test_database.py             (Database operations)
+  ├─→ test_alerts.py               (Alert notifications)
+  └─→ test_fastapi.py              (API endpoints)
+
+
+═══════════════════════════════════════════════════════════════════════════
+                            DATA FLOW SUMMARY
+═══════════════════════════════════════════════════════════════════════════
+
+INPUT                PROCESSING              OUTPUT
+─────────────────────────────────────────────────────────────────────────
+Realtor.com      ─┐
+Redfin.com       ─┼─→ [Stage 1: Scraper]    ─→ raw_listings.csv
+Zillow.com       ─┘                              ↓
+                                            [Stage 2: Enrichment]
+                                                 ↓
+                                            classified_listings.csv
+                                                 ↓
+                                            [Stage 3: Classification]
+                                            (OpenAI GPT-4)
+                                                 ↓
+                                            classified_listings.json
+                                            (with scores)
+                                                 ↓
+                        ┌───────────────────────┼───────────────────────┐
+                        ↓                       ↓                       ↓
+                    [Stage 4]             [Stage 5]             [Stage 6]
+                  Google Sheets          Email Alerts         SQLite DB
+                        ↓                       ↓                       ↓
+                    DevelopmentLeads      3 Notifications    development_leads.db
+                    (Sheet1 + Resources)  (to user)           (Persistent)
+                                                                    ↓
+                                                           [Stage 7: Maps]
+                                                                    ↓
+                                                          latest_map.html
+                                                          (33 properties)
+                                                                    ↓
+                                                           [Stage 8: ROI] ← NEW
+                                                                    ↓
+                                                           roi_score,
+                                                           roi_percentage,
+                                                           buildable_sf
+
+
+═══════════════════════════════════════════════════════════════════════════
+                            PROJECT STATS
+═══════════════════════════════════════════════════════════════════════════
+
+CODEBASE
+  Total Python files:     86
+  Main modules:           22+
+  Test files:             4
+  Total lines of code:    ~5,000+
+
+DATA
+  Properties collected:    33
+  Properties with GIS:     8
+  Properties in Sheets:    29
+  Database records:        33
+  Map visualizations:      1 (latest_map.html)
+
+INTEGRATIONS
+  Google Sheets:          ✅ (1 spreadsheet, 2+ tabs)
+  Email Alerts:           ✅ (3-notification system)
+  SQLite Database:        ✅ (persistent storage)
+  Folium Maps:            ✅ (interactive web maps)
+  OpenAI API:             ✅ (GPT classification)
+  SerpAPI:                ✅ (search scraping)
+  Zoning Data:            ✅ (GIS shapefiles)
+
+FEATURES
+  Automated scraping:     ✅
+  AI classification:      ✅
+  GIS enrichment:         ✅
+  Google Sheets sync:     ✅
+  Email notifications:    ✅
+  Historical database:    ✅
+  Interactive maps:       ✅
+  ROI scoring:            🆕 (In Task 5)
+  ML model tuning:        📋 (Task 6)
+
+═══════════════════════════════════════════════════════════════════════════
